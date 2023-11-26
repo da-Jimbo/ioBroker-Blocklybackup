@@ -1,0 +1,193 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable type="cron" id="FutroBackup">FutroBackup</variable>
+    <variable id="#(^v1Jvamc2Fk6h8(qG%">lastBackup</variable>
+    <variable id="*WJidfwX4.yzjZ`l`)1n">Heute</variable>
+  </variables>
+  <block type="schedule_create" id="QfisVCOuFL,gacW9,1(D" x="62" y="-25">
+    <field name="NAME">FutroBackup</field>
+    <value name="SCHEDULE">
+      <shadow type="field_cron" id="M5po6K$ML;VZ:ph0qJEC">
+        <field name="CRON">{"time":{"exactTime":true,"start":"04:00"},"period":{"days":1}}</field>
+      </shadow>
+    </value>
+    <statement name="STATEMENT">
+      <block type="variables_set" id="(nz]M71Wk#3V9BF^.qft">
+        <field name="VAR" id="#(^v1Jvamc2Fk6h8(qG%">lastBackup</field>
+        <value name="VALUE">
+          <block type="text_getSubstring" id=":jpBC`|;RkTzF[!SGt4N">
+            <mutation at1="false" at2="true"></mutation>
+            <field name="WHERE1">FIRST</field>
+            <field name="WHERE2">FROM_END</field>
+            <value name="STRING">
+              <block type="convert_tostring" id="wiB2GK.~WrfN`*S5WM=i">
+                <value name="VALUE">
+                  <block type="get_value" id="Xp;R0[ugz.*nY)}-?NlS">
+                    <field name="ATTR">lc</field>
+                    <field name="OID">0_userdata.0.Server.letztes_FutroBackup</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="AT2">
+              <block type="math_number" id="@%cuawOYJt!jH=iWq~sd">
+                <field name="NUM">4</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="6xkccVU:Jb8-jd,Zt@6y">
+            <field name="VAR" id="*WJidfwX4.yzjZ`l`)1n">Heute</field>
+            <value name="VALUE">
+              <block type="text_getSubstring" id="WCP3C-sdi#.C0ed%RV=C">
+                <mutation at1="false" at2="true"></mutation>
+                <field name="WHERE1">FIRST</field>
+                <field name="WHERE2">FROM_END</field>
+                <value name="STRING">
+                  <block type="convert_tostring" id="ZpawJz-*z{iI_ON?vxF7">
+                    <value name="VALUE">
+                      <block type="get_value" id="J*;P2@utzch9gU`|sOJR">
+                        <field name="ATTR">lc</field>
+                        <field name="OID">0_userdata.0.Zeitfunktionen.Tagesnummer</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="AT2">
+                  <block type="math_number" id="},L#?c}*09JRb,`P=a?Y">
+                    <field name="NUM">4</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="comment" id="n:SL^g$dV?:Qv_QrNg$q">
+                <field name="COMMENT">60Tage=5184000</field>
+                <next>
+                  <block type="controls_if" id="^T:ER%wRcJqW={SX3sJX">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare" id="nVyAbNehPA0=auIuvO,z">
+                        <field name="OP">GT</field>
+                        <value name="A">
+                          <block type="math_arithmetic" id="s8}M=1eU`[fZwYuDOM-2">
+                            <field name="OP">MINUS</field>
+                            <value name="A">
+                              <shadow type="math_number" id="5J#?b#e2G|Kr+AvaRp1@">
+                                <field name="NUM">1</field>
+                              </shadow>
+                              <block type="variables_get" id=":~A`SvJput$jJCZ/-YA#">
+                                <field name="VAR" id="*WJidfwX4.yzjZ`l`)1n">Heute</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <shadow type="math_number" id="-[(7S^oY6Lhi)KoDU0VV">
+                                <field name="NUM">1</field>
+                              </shadow>
+                              <block type="variables_get" id="N:Bj_zB2m4tOPEda*qY@">
+                                <field name="VAR" id="#(^v1Jvamc2Fk6h8(qG%">lastBackup</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="`pYb*3s#;_+/c!kA;+CB">
+                            <field name="NUM">2592000</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="telegram" id="}BAh-Y%0{a^@g,prHhB{">
+                        <field name="INSTANCE">.0</field>
+                        <field name="LOG"></field>
+                        <field name="SILENT">FALSE</field>
+                        <field name="PARSEMODE">default</field>
+                        <field name="ESCAPING">FALSE</field>
+                        <field name="DISABLE_WEB_PAGE_PREVIEW">FALSE</field>
+                        <value name="MESSAGE">
+                          <shadow type="text" id="[hg`NK{9kyshdvY2@s;=">
+                            <field name="TEXT">text</field>
+                          </shadow>
+                          <block type="text" id="{_a|LFbrVqjsBpf{May^">
+                            <field name="TEXT">Das letzte Backup vom Server auf USB-Festplatte ist schon älter als 2 Monate.</field>
+                          </block>
+                        </value>
+                        <value name="USERNAME">
+                          <block type="text" id=";-S0}gSlk72QUMUi,ZV9">
+                            <field name="TEXT">Chriss</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="debug" id="f*uws!d8ye`DFWeodm~$">
+                        <field name="Severity">warn</field>
+                        <value name="TEXT">
+                          <shadow type="text" id="=I{1/2%@PHInpZ$$-CzP">
+                            <field name="TEXT">Das Backup ist noch nicht zu alt. </field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="on" id="@USt#-)y|LT4ii-V=xX(">
+        <field name="OID">0_userdata.0.Server.letztes_FutroBackup</field>
+        <field name="CONDITION">ne</field>
+        <field name="ACK_CONDITION"></field>
+        <statement name="STATEMENT">
+          <block type="debug" id="DuwUY`!$ZWvzhLH2$b*q">
+            <field name="Severity">warn</field>
+            <value name="TEXT">
+              <shadow type="text" id="7dCV+SD_/1_893V!2B@U">
+                <field name="TEXT">Backup erfolgreich! </field>
+              </shadow>
+              <block type="text_join" id="8{Lj*vpg/-TTv:LPkTfv">
+                <mutation items="2"></mutation>
+                <value name="ADD0">
+                  <block type="text" id="X7?1,6|w2|9_.$gRu)kF">
+                    <field name="TEXT">Backup erfolgreich! </field>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="on_source" id="ccuv80O$,wD{]f1l[J9^">
+                    <field name="ATTR">state.val</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="telegram" id="q:UsLFY_dh1I`,8_fJtM">
+                <field name="INSTANCE">.0</field>
+                <field name="LOG"></field>
+                <field name="SILENT">FALSE</field>
+                <field name="PARSEMODE">default</field>
+                <field name="ESCAPING">FALSE</field>
+                <field name="DISABLE_WEB_PAGE_PREVIEW">FALSE</field>
+                <value name="MESSAGE">
+                  <shadow type="text" id="1y3j^`|D$`8N3b}lss?2">
+                    <field name="TEXT">Backup erfolgreich. Bitte Festplatte abstecken! </field>
+                  </shadow>
+                </value>
+                <value name="USERNAME">
+                  <block type="text" id="CDPVlSAK:e!Z!]c,_Te@">
+                    <field name="TEXT">Chriss</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>
