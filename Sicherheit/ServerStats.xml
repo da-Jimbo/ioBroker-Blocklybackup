@@ -1,0 +1,1074 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="tomHFkqh05:rY9V|csIL">Rohdaten</variable>
+    <variable id="(jI!-T5s+me-wr:[c^I2">result</variable>
+    <variable id="**Ib=SkA6LekP#lvMuJ^">temp1</variable>
+    <variable id="8ZzE%8X]nt0:I^6_3VMm">temp2</variable>
+    <variable id="[%jO6`/,K8V{3}uxVK;J">temp3</variable>
+    <variable id=".U{XqMTrHIy_5RP-V.{B">temp4</variable>
+    <variable id="xeA)1ZQ!(8A59/%1z-dM">temp5</variable>
+    <variable id="Kv$l_eSfSRs2$^V*B=7p">temp6</variable>
+    <variable id="9N1bIs7|MNqf6@J$Cx(l">temp7</variable>
+    <variable id="W#Bz+$Ui`niWW2AZ5NyY">temp8</variable>
+    <variable id="c_}aw0{Bw}SE-~m{dEtU">ServerRAMfrei</variable>
+    <variable id="];C3y*KgHVc:w:ZeMnpy">Laufzeit</variable>
+    <variable id="Ne_fic?ipdES$(phY^oC">ServerCPUauslastung</variable>
+    <variable id=";.RpLVdg`t;7yYPCU!kM">Harddisk_free</variable>
+    <variable id="d!I^r0=G3?:ew$B1|nMN">Harddisk_used</variable>
+    <variable id="A,D*IhnDPkg7*+0BuYlJ">FutroBackup</variable>
+  </variables>
+  <block type="schedule" id="GJok^CxisOGDcc-+*^R:" x="163" y="-45">
+    <field name="SCHEDULE">*/5 * * * *</field>
+    <statement name="STATEMENT">
+      <block type="controls_if" id="nt]*Uo!+*QC3(j7.a`ut">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="time_compare" id="(,O7}Hg|,f5qXGccD.=J">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" end_time="true"></mutation>
+            <field name="OPTION">between</field>
+            <field name="START_TIME">08:00</field>
+            <field name="END_TIME">22:00</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="procedures_callnoreturn" id="9|Irlz4ndL_,Nh%Kh2P8">
+            <mutation name="Daten auslesen"></mutation>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="controls_if" id="~2jj0Kw=wZX63wnIR3Fo">
+            <mutation elseif="3" else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="K/rcF]q(HYPKJ`?$,++1">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="time_get" id="K24$grI_n_S)iytEiNXh">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                    <field name="OPTION">m</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="Y4v!AVB}h|1OnSCbYuZA">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="procedures_callnoreturn" id="VB$LCjH)e{E#`(wDI!Q.">
+                <mutation name="Daten auslesen"></mutation>
+              </block>
+            </statement>
+            <value name="IF1">
+              <block type="logic_compare" id="W/hO-AybFAnAV.)Rnk3^">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="time_get" id="]I;r,3B]Hi`)@[^5%-Q7">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                    <field name="OPTION">m</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="JIfRT/FXFU5^9t3bUpN+">
+                    <field name="NUM">15</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO1">
+              <block type="procedures_callnoreturn" id="hQ+6Qv$h9}LH$#1OW)M`">
+                <mutation name="Daten auslesen"></mutation>
+              </block>
+            </statement>
+            <value name="IF2">
+              <block type="logic_compare" id="s*W2z#Ih0otZPe}!(OJU">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="time_get" id="I?.`ukjPB}@1U[o4^Oj5">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                    <field name="OPTION">m</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="(K[aY#1Xv]O(:$E2g(P6">
+                    <field name="NUM">30</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO2">
+              <block type="procedures_callnoreturn" id="i*}gEOIyqc9$5:S~pJqI">
+                <mutation name="Daten auslesen"></mutation>
+              </block>
+            </statement>
+            <value name="IF3">
+              <block type="logic_compare" id="(d98W%nvPr{qw1o?gB=w">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="time_get" id="D*/rN:e{U)V=C)p!MZkz">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                    <field name="OPTION">m</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id=",Yt*t4xR~L#*){HXsiI?">
+                    <field name="NUM">45</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO3">
+              <block type="procedures_callnoreturn" id="uVp=I,sBsS=h1GW@zIp=">
+                <mutation name="Daten auslesen"></mutation>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="comment" id="B?^L#EVH^SME4KGI?=Sf">
+                <field name="COMMENT">wenn außerhalb des 15min-takt</field>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="}Bhr2b6EWV3p;4dJc,cZ" x="163" y="463">
+    <field name="NAME">Daten auslesen</field>
+    <comment pinned="false" h="80" w="160">Liest die Datei in Variablen ein und schreibt die Datenpunkte</comment>
+    <statement name="STACK">
+      <block type="timeouts_wait" id="+hdhu3raFZdgS5wm-_d5">
+        <field name="DELAY">2</field>
+        <field name="UNIT">sec</field>
+        <next>
+          <block type="comment" id="N9{g!8w~B(p~SvMulrc;">
+            <field name="COMMENT">liest die Temperaturwerte alle 5min aus</field>
+            <next>
+              <block type="exec" id="GUA+81@.8}@~$,P*wx1*">
+                <mutation xmlns="http://www.w3.org/1999/xhtml" with_statement="true"></mutation>
+                <field name="WITH_STATEMENT">TRUE</field>
+                <field name="LOG"></field>
+                <value name="COMMAND">
+                  <shadow type="text" id="|[@T,h^X{d|P_.-b}sB.">
+                    <field name="TEXT">tail /opt/tausch/temperaturen.json</field>
+                  </shadow>
+                </value>
+                <statement name="STATEMENT">
+                  <block type="variables_set" id="Bs!$:h4y5V^-C}j~XJA.">
+                    <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                    <value name="VALUE">
+                      <block type="variables_get" id="qcZy#//(.hx#2(+P3{LU">
+                        <field name="VAR" id="(jI!-T5s+me-wr:[c^I2">result</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="update" id=",A-==u}?1Fo4O/bn{(Jd" disabled="true">
+                        <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                        <field name="OID">0_userdata.0.Server.Übertrag</field>
+                        <field name="WITH_DELAY">FALSE</field>
+                        <value name="VALUE">
+                          <block type="convert_tostring" id="U05L(sy@vk_/+:SFX+_Z">
+                            <value name="VALUE">
+                              <block type="variables_get" id=",/*b/c#!%o}!|QMTq#q*">
+                                <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="30MBh1:4?P^`E_lOfFS_">
+                            <field name="VAR" id="**Ib=SkA6LekP#lvMuJ^">temp1</field>
+                            <value name="VALUE">
+                              <block type="text_getSubstring" id="9;f!Oo4rk1PoS/[tw=;E">
+                                <mutation at1="true" at2="true"></mutation>
+                                <field name="WHERE1">FROM_START</field>
+                                <field name="WHERE2">FROM_START</field>
+                                <value name="STRING">
+                                  <block type="variables_get" id="]cjK8B[./Ir)cdt[;pR|">
+                                    <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                  </block>
+                                </value>
+                                <value name="AT1">
+                                  <block type="math_number" id="l,k[TpL[9YH=wq?LK`:*">
+                                    <field name="NUM">17</field>
+                                  </block>
+                                </value>
+                                <value name="AT2">
+                                  <block type="math_number" id=",beJ^rd{Ds(kEH6=~{ds">
+                                    <field name="NUM">23</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="rGhBVT2Vm^k3*2#JcWc6">
+                                <field name="VAR" id="8ZzE%8X]nt0:I^6_3VMm">temp2</field>
+                                <value name="VALUE">
+                                  <block type="text_getSubstring" id="2fj5O)`z*n/J-::d:[!q">
+                                    <mutation at1="true" at2="true"></mutation>
+                                    <field name="WHERE1">FROM_START</field>
+                                    <field name="WHERE2">FROM_START</field>
+                                    <value name="STRING">
+                                      <block type="variables_get" id="sX7faDaq%w,e]70OUVc]">
+                                        <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                      </block>
+                                    </value>
+                                    <value name="AT1">
+                                      <block type="math_number" id=")R;9@ClA!aTaV}FgqAcF">
+                                        <field name="NUM">40</field>
+                                      </block>
+                                    </value>
+                                    <value name="AT2">
+                                      <block type="math_number" id="CgB-;F;njxB.Eq#aeEg8">
+                                        <field name="NUM">46</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="variables_set" id="%xTud6:bw7[Fgz1C,o2K">
+                                    <field name="VAR" id="[%jO6`/,K8V{3}uxVK;J">temp3</field>
+                                    <value name="VALUE">
+                                      <block type="text_getSubstring" id="QUQ,w@}Z96=Yfe-/NO%}">
+                                        <mutation at1="true" at2="true"></mutation>
+                                        <field name="WHERE1">FROM_START</field>
+                                        <field name="WHERE2">FROM_START</field>
+                                        <value name="STRING">
+                                          <block type="variables_get" id="y!sbY7@!*ed!W]vD;h7C">
+                                            <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                          </block>
+                                        </value>
+                                        <value name="AT1">
+                                          <block type="math_number" id="*yUB^Vcslf?^114#=3ix">
+                                            <field name="NUM">63</field>
+                                          </block>
+                                        </value>
+                                        <value name="AT2">
+                                          <block type="math_number" id="qGGU[nPmpWc8^@4,:R?Y">
+                                            <field name="NUM">69</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="variables_set" id=".:HJlmpBh3.nDPXGVMUi">
+                                        <field name="VAR" id=".U{XqMTrHIy_5RP-V.{B">temp4</field>
+                                        <value name="VALUE">
+                                          <block type="text_getSubstring" id="iELsv/rNxd5aI_(y@B[#">
+                                            <mutation at1="true" at2="true"></mutation>
+                                            <field name="WHERE1">FROM_START</field>
+                                            <field name="WHERE2">FROM_START</field>
+                                            <value name="STRING">
+                                              <block type="variables_get" id="y?(2#%v8sjoQ.hnuhwgo">
+                                                <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                              </block>
+                                            </value>
+                                            <value name="AT1">
+                                              <block type="math_number" id="inb-Bki-/3=GNAs6lnQ,">
+                                                <field name="NUM">86</field>
+                                              </block>
+                                            </value>
+                                            <value name="AT2">
+                                              <block type="math_number" id="4Hhf?y~Ztuw]jjPq|0pS">
+                                                <field name="NUM">92</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="variables_set" id="V#`?]6XUD{KrwNsvTUe[">
+                                            <field name="VAR" id="xeA)1ZQ!(8A59/%1z-dM">temp5</field>
+                                            <value name="VALUE">
+                                              <block type="text_getSubstring" id="`|,xTcVioIY!gi^9pfGx">
+                                                <mutation at1="true" at2="true"></mutation>
+                                                <field name="WHERE1">FROM_START</field>
+                                                <field name="WHERE2">FROM_START</field>
+                                                <value name="STRING">
+                                                  <block type="variables_get" id="#b|:y4!*aMI9D9AP#(S?">
+                                                    <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                  </block>
+                                                </value>
+                                                <value name="AT1">
+                                                  <block type="math_number" id="(PaV?za[vGkI2F~Cinkw">
+                                                    <field name="NUM">109</field>
+                                                  </block>
+                                                </value>
+                                                <value name="AT2">
+                                                  <block type="math_number" id="x~|xqM#5nOJ2-C]}D3fB">
+                                                    <field name="NUM">115</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="variables_set" id="Js/V)H*vZV8If=`KKR[A">
+                                                <field name="VAR" id="Kv$l_eSfSRs2$^V*B=7p">temp6</field>
+                                                <value name="VALUE">
+                                                  <block type="text_getSubstring" id="Th@1G|esJbOJ4o]2dSl`">
+                                                    <mutation at1="true" at2="true"></mutation>
+                                                    <field name="WHERE1">FROM_START</field>
+                                                    <field name="WHERE2">FROM_START</field>
+                                                    <value name="STRING">
+                                                      <block type="variables_get" id=",sfZ:YH_PE`CQzZ%e8yx">
+                                                        <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="AT1">
+                                                      <block type="math_number" id="(KnKeIus?{/$?*qV1%Je">
+                                                        <field name="NUM">132</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="AT2">
+                                                      <block type="math_number" id="=cxPQ]*n#gI(]CFL2z4`">
+                                                        <field name="NUM">138</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="variables_set" id="2pwTwDQuC}R8+s]Q5o?0">
+                                                    <field name="VAR" id="9N1bIs7|MNqf6@J$Cx(l">temp7</field>
+                                                    <value name="VALUE">
+                                                      <block type="text_getSubstring" id="xFBM]?Tnip}LZC=oYK5#">
+                                                        <mutation at1="true" at2="true"></mutation>
+                                                        <field name="WHERE1">FROM_START</field>
+                                                        <field name="WHERE2">FROM_START</field>
+                                                        <value name="STRING">
+                                                          <block type="variables_get" id="GPiu9hwc4@)P^==FKFe:">
+                                                            <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="AT1">
+                                                          <block type="math_number" id="LSPysMg$CFgf}u3`v9R}">
+                                                            <field name="NUM">155</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="AT2">
+                                                          <block type="math_number" id="lv%#2%dPQ^da0;N-`.,Y">
+                                                            <field name="NUM">161</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="variables_set" id="gFAJ}YJCQ8{H7Y26=Iqa">
+                                                        <field name="VAR" id="W#Bz+$Ui`niWW2AZ5NyY">temp8</field>
+                                                        <value name="VALUE">
+                                                          <block type="text_getSubstring" id="_MgWk~*5v0SAN{_;bO5x">
+                                                            <mutation at1="true" at2="true"></mutation>
+                                                            <field name="WHERE1">FROM_START</field>
+                                                            <field name="WHERE2">FROM_START</field>
+                                                            <value name="STRING">
+                                                              <block type="variables_get" id="%l**,L5Kw4~)}+la0W[t">
+                                                                <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="AT1">
+                                                              <block type="math_number" id=",pwosExvH!y6r#/rJsgS">
+                                                                <field name="NUM">178</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="AT2">
+                                                              <block type="math_number" id="x`nQzCFuW!!9TRM[TEuL">
+                                                                <field name="NUM">184</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="variables_set" id="l}hg9FpnqT2X;YPG6|$h">
+                                                            <field name="VAR" id="c_}aw0{Bw}SE-~m{dEtU">ServerRAMfrei</field>
+                                                            <value name="VALUE">
+                                                              <block type="text_getSubstring" id="6]/;WjRjkKRQZo,?bM$w">
+                                                                <mutation at1="true" at2="true"></mutation>
+                                                                <field name="WHERE1">FROM_START</field>
+                                                                <field name="WHERE2">FROM_START</field>
+                                                                <value name="STRING">
+                                                                  <block type="variables_get" id="8yfZKo=d4e/!|7%W`eIg">
+                                                                    <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="AT1">
+                                                                  <block type="math_arithmetic" id="LwP{k}^5W!8{z2`_(27p">
+                                                                    <field name="OP">MINUS</field>
+                                                                    <value name="A">
+                                                                      <shadow type="math_number" id="CE(H!VX.!!b=v#-eH30x">
+                                                                        <field name="NUM">1</field>
+                                                                      </shadow>
+                                                                      <block type="text_indexOf" id="cDW2#zB+mOU1C|!j/%^1">
+                                                                        <field name="END">FIRST</field>
+                                                                        <value name="VALUE">
+                                                                          <block type="variables_get" id="haO1W#HlbfgiG{Pg^t9M">
+                                                                            <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="FIND">
+                                                                          <shadow type="text" id="hGx*kQ]$WP^]{Ve!2#=h">
+                                                                            <field name="TEXT">up </field>
+                                                                          </shadow>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <shadow type="math_number" id="urWj#~Dlr8RO-V+VZ)p]">
+                                                                        <field name="NUM">14</field>
+                                                                      </shadow>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="AT2">
+                                                                  <block type="math_arithmetic" id="UT,Vj#3Ay||f,;7X)/uc">
+                                                                    <field name="OP">MINUS</field>
+                                                                    <value name="A">
+                                                                      <shadow type="math_number" id="2B#m#N0B`~roNu~zL~4f">
+                                                                        <field name="NUM">1</field>
+                                                                      </shadow>
+                                                                      <block type="text_indexOf" id="d4O1T*7Ia*OSkymRk!/#">
+                                                                        <field name="END">FIRST</field>
+                                                                        <value name="VALUE">
+                                                                          <block type="variables_get" id="d)IwEoNIh]:S9o({m,(R">
+                                                                            <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="FIND">
+                                                                          <shadow type="text" id="{ZvmCH,T%!uP=i#+$fA6">
+                                                                            <field name="TEXT">up </field>
+                                                                          </shadow>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="B">
+                                                                      <shadow type="math_number" id="2j:4ZZ#gc?F]X~jub11U">
+                                                                        <field name="NUM">10</field>
+                                                                      </shadow>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="variables_set" id="#I`W*hlN#Ta_^-eU%-C3">
+                                                                <field name="VAR" id="];C3y*KgHVc:w:ZeMnpy">Laufzeit</field>
+                                                                <value name="VALUE">
+                                                                  <block type="text_getSubstring" id="*FeqKP53V;335Vl-JQqA">
+                                                                    <mutation at1="true" at2="true"></mutation>
+                                                                    <field name="WHERE1">FROM_START</field>
+                                                                    <field name="WHERE2">FROM_START</field>
+                                                                    <value name="STRING">
+                                                                      <block type="variables_get" id="=B1UwgQtVSOLwa=BrNC7">
+                                                                        <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="AT1">
+                                                                      <block type="math_arithmetic" id="c#9PwVH%:PjzgXGF_-~m">
+                                                                        <field name="OP">ADD</field>
+                                                                        <value name="A">
+                                                                          <shadow type="math_number" id=",mqS32lsQwE4i32rod/c">
+                                                                            <field name="NUM">1</field>
+                                                                          </shadow>
+                                                                          <block type="text_indexOf" id="07=_LJuTNh7gVjHh.;.$">
+                                                                            <field name="END">FIRST</field>
+                                                                            <value name="VALUE">
+                                                                              <block type="variables_get" id="N,cxL8|zU64WYi@dZ`)s">
+                                                                                <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="FIND">
+                                                                              <shadow type="text" id="p9T8e;9vxmzJ-q6p5@2{">
+                                                                                <field name="TEXT">up </field>
+                                                                              </shadow>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="B">
+                                                                          <shadow type="math_number" id="[pgjU@{f8vH7A]ebtWHV">
+                                                                            <field name="NUM">3</field>
+                                                                          </shadow>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="AT2">
+                                                                      <block type="math_arithmetic" id="i3/LD$BV9N6rGGBnyFs+">
+                                                                        <field name="OP">MINUS</field>
+                                                                        <value name="A">
+                                                                          <shadow type="math_number" id="TcThrrOjpjT#:#L=22n|">
+                                                                            <field name="NUM">1</field>
+                                                                          </shadow>
+                                                                          <block type="text_indexOf" id="ykvjk5,0b6+ol3%81YxH">
+                                                                            <field name="END">FIRST</field>
+                                                                            <value name="VALUE">
+                                                                              <block type="variables_get" id="Uvbof;kG$5Ih7w~U4-]b">
+                                                                                <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="FIND">
+                                                                              <shadow type="text" id="BKA~YKp1rdX~/!9M#j5C">
+                                                                                <field name="TEXT">user</field>
+                                                                              </shadow>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="B">
+                                                                          <shadow type="math_number" id="rsWUFpt}Etg4we)g]4[y">
+                                                                            <field name="NUM">5</field>
+                                                                          </shadow>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="variables_set" id="P%%lvkLC4(@qbg=AV7|E">
+                                                                    <field name="VAR" id="Ne_fic?ipdES$(phY^oC">ServerCPUauslastung</field>
+                                                                    <value name="VALUE">
+                                                                      <block type="text_getSubstring" id="HaG0FQl|n5dnEPysYq|S">
+                                                                        <mutation at1="true" at2="true"></mutation>
+                                                                        <field name="WHERE1">FROM_START</field>
+                                                                        <field name="WHERE2">FROM_START</field>
+                                                                        <value name="STRING">
+                                                                          <block type="variables_get" id="vQfyd!ue/CY8ozZ$+vrW">
+                                                                            <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="AT1">
+                                                                          <block type="math_arithmetic" id="?+VX(rFqE6,~in9JKR+Z">
+                                                                            <field name="OP">ADD</field>
+                                                                            <value name="A">
+                                                                              <shadow type="math_number" id="-!e_G[-d0s^Qo]*/1jT9">
+                                                                                <field name="NUM">1</field>
+                                                                              </shadow>
+                                                                              <block type="text_indexOf" id="Z:b@0vD6q`Glsc!IjAGu">
+                                                                                <field name="END">FIRST</field>
+                                                                                <value name="VALUE">
+                                                                                  <block type="variables_get" id="^8CU|w-f`H?E-0shKe!U">
+                                                                                    <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="FIND">
+                                                                                  <shadow type="text" id="O}8l*AcB=)`A?x;y1bLB">
+                                                                                    <field name="TEXT">average:</field>
+                                                                                  </shadow>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="B">
+                                                                              <shadow type="math_number" id="0;~mtd%mHp/^.s-x`[U/">
+                                                                                <field name="NUM">9</field>
+                                                                              </shadow>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="AT2">
+                                                                          <block type="math_arithmetic" id="f%KES@BfTKbq=COHM[cb">
+                                                                            <field name="OP">ADD</field>
+                                                                            <value name="A">
+                                                                              <shadow type="math_number" id="L$}2ba`fU#c9y2@;)Y])">
+                                                                                <field name="NUM">1</field>
+                                                                              </shadow>
+                                                                              <block type="text_indexOf" id="2#!ycI!PV=:Fr~6lc9kL">
+                                                                                <field name="END">FIRST</field>
+                                                                                <value name="VALUE">
+                                                                                  <block type="variables_get" id="C#iWdOZt7iP{Ldy3@BQG">
+                                                                                    <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="FIND">
+                                                                                  <shadow type="text" id="hs1iaa^CXmgHW8ZgA0qk">
+                                                                                    <field name="TEXT">average:</field>
+                                                                                  </shadow>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="B">
+                                                                              <shadow type="math_number" id="zBV1MV`$B6;z6kS8pbmA">
+                                                                                <field name="NUM">12</field>
+                                                                              </shadow>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="variables_set" id="-e`fPi4R[^zVXNx=eDR0">
+                                                                        <field name="VAR" id=";.RpLVdg`t;7yYPCU!kM">Harddisk_free</field>
+                                                                        <value name="VALUE">
+                                                                          <block type="text_getSubstring" id="Ji1SYevVo$X`O:?Bb(hT">
+                                                                            <mutation at1="true" at2="true"></mutation>
+                                                                            <field name="WHERE1">FROM_START</field>
+                                                                            <field name="WHERE2">FROM_START</field>
+                                                                            <value name="STRING">
+                                                                              <block type="variables_get" id="fJHm-9CR_9vJ|6V(f1|G">
+                                                                                <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="AT1">
+                                                                              <block type="math_arithmetic" id=":E`$E6jjH5mo^p!m$2P+">
+                                                                                <field name="OP">ADD</field>
+                                                                                <value name="A">
+                                                                                  <shadow type="math_number" id="t*e^n5]mP1iF,]iNq_Qp">
+                                                                                    <field name="NUM">1</field>
+                                                                                  </shadow>
+                                                                                  <block type="text_indexOf" id="Nqx6ijap=+|j4Bz%}tIt">
+                                                                                    <field name="END">FIRST</field>
+                                                                                    <value name="VALUE">
+                                                                                      <block type="variables_get" id="?eGOkk`+F5D0K$[WFy1G">
+                                                                                        <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <value name="FIND">
+                                                                                      <shadow type="text" id="j*AO.O^QqN=dHC`V7l/1">
+                                                                                        <field name="TEXT">/dev/sda3</field>
+                                                                                      </shadow>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="B">
+                                                                                  <shadow type="math_number" id="jK$5f!H0k0^9(tA~26[I">
+                                                                                    <field name="NUM">23</field>
+                                                                                  </shadow>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="AT2">
+                                                                              <block type="math_arithmetic" id="3*u;tyLEi/TihuRN-w*q">
+                                                                                <field name="OP">ADD</field>
+                                                                                <value name="A">
+                                                                                  <shadow type="math_number" id="?}koZT03lcwYq`i_t$um">
+                                                                                    <field name="NUM">1</field>
+                                                                                  </shadow>
+                                                                                  <block type="text_indexOf" id=":KwU:vzCD80{n2tfdL=s">
+                                                                                    <field name="END">FIRST</field>
+                                                                                    <value name="VALUE">
+                                                                                      <block type="variables_get" id="1-a](]FB!|[Sl`6C(uxf">
+                                                                                        <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <value name="FIND">
+                                                                                      <shadow type="text" id="R7[fwx^~k8eeHeX4dn+$">
+                                                                                        <field name="TEXT">%</field>
+                                                                                      </shadow>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="B">
+                                                                                  <shadow type="math_number" id="K|WWvnE2@-M5+QBbB`{N">
+                                                                                    <field name="NUM">-4</field>
+                                                                                  </shadow>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <next>
+                                                                          <block type="variables_set" id="ue1QCiqVz.e+D5WsO|q4">
+                                                                            <field name="VAR" id="d!I^r0=G3?:ew$B1|nMN">Harddisk_used</field>
+                                                                            <value name="VALUE">
+                                                                              <block type="text_getSubstring" id="M3VfRr^9f;{Oi5)n#s7Z">
+                                                                                <mutation at1="true" at2="true"></mutation>
+                                                                                <field name="WHERE1">FROM_START</field>
+                                                                                <field name="WHERE2">FROM_START</field>
+                                                                                <value name="STRING">
+                                                                                  <block type="variables_get" id="[sjQrnc{AD).:w[gmVMR">
+                                                                                    <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="AT1">
+                                                                                  <block type="math_arithmetic" id="!]y{vA}*Ck2b)Br!|b0N">
+                                                                                    <field name="OP">ADD</field>
+                                                                                    <value name="A">
+                                                                                      <shadow type="math_number" id="QdrrD%-vSKbun_HX]X`U">
+                                                                                        <field name="NUM">1</field>
+                                                                                      </shadow>
+                                                                                      <block type="text_indexOf" id="2t=Ie;_zP7Bz)~cM-VJV">
+                                                                                        <field name="END">FIRST</field>
+                                                                                        <value name="VALUE">
+                                                                                          <block type="variables_get" id="8|6%luE}qD3:K.d2B0GU">
+                                                                                            <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <value name="FIND">
+                                                                                          <shadow type="text" id=")[F0wr/7FZ@`[URGRFvp">
+                                                                                            <field name="TEXT">/dev/sda3</field>
+                                                                                          </shadow>
+                                                                                        </value>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <value name="B">
+                                                                                      <shadow type="math_number" id="bfKpdN:A:EDKC**qo;;q">
+                                                                                        <field name="NUM">17</field>
+                                                                                      </shadow>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="AT2">
+                                                                                  <block type="math_arithmetic" id="azJ3lYA/b[q{=@??`)1{">
+                                                                                    <field name="OP">ADD</field>
+                                                                                    <value name="A">
+                                                                                      <shadow type="math_number" id="_eSFU=]D5OFVV8GH)%1)">
+                                                                                        <field name="NUM">1</field>
+                                                                                      </shadow>
+                                                                                      <block type="text_indexOf" id="[*G%Ao${$Bs}/Y8q9?^*">
+                                                                                        <field name="END">FIRST</field>
+                                                                                        <value name="VALUE">
+                                                                                          <block type="variables_get" id="{ZY*jk.rLjlx|fTG#buk">
+                                                                                            <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <value name="FIND">
+                                                                                          <shadow type="text" id="wpsop~Q.xeU)/_wCA77H">
+                                                                                            <field name="TEXT">%</field>
+                                                                                          </shadow>
+                                                                                        </value>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <value name="B">
+                                                                                      <shadow type="math_number" id="0xG%eN]x:}/IH^3NP!|)">
+                                                                                        <field name="NUM">-10</field>
+                                                                                      </shadow>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                            <next>
+                                                                              <block type="variables_set" id="QgdXPSF6wq*T#?FP.Cqb">
+                                                                                <field name="VAR" id="A,D*IhnDPkg7*+0BuYlJ">FutroBackup</field>
+                                                                                <value name="VALUE">
+                                                                                  <block type="text_getSubstring" id="y^0w@7m?jz7O0WDTF[vc">
+                                                                                    <mutation at1="true" at2="true"></mutation>
+                                                                                    <field name="WHERE1">FROM_START</field>
+                                                                                    <field name="WHERE2">FROM_START</field>
+                                                                                    <value name="STRING">
+                                                                                      <block type="variables_get" id="Xah;K5o5+`U|zF+`z?B6">
+                                                                                        <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <value name="AT1">
+                                                                                      <block type="math_arithmetic" id=";)H{VzjZI@TPU-BYP^0B">
+                                                                                        <field name="OP">ADD</field>
+                                                                                        <value name="A">
+                                                                                          <shadow type="math_number" id="%gB[D^S0FsdVS~c?xFT]">
+                                                                                            <field name="NUM">1</field>
+                                                                                          </shadow>
+                                                                                          <block type="text_indexOf" id="|fF;l]CjQCiNQsKvSnnX">
+                                                                                            <field name="END">FIRST</field>
+                                                                                            <value name="VALUE">
+                                                                                              <block type="variables_get" id="PNyBRxd(,)Nb]Y7CB*jf">
+                                                                                                <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                                              </block>
+                                                                                            </value>
+                                                                                            <value name="FIND">
+                                                                                              <shadow type="text" id="2N?YRtof-K-273ggpY]t">
+                                                                                                <field name="TEXT">FutroBackup:</field>
+                                                                                              </shadow>
+                                                                                            </value>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <value name="B">
+                                                                                          <shadow type="math_number" id="-aJc9LNlB8Z3681=Dc0w">
+                                                                                            <field name="NUM">15</field>
+                                                                                          </shadow>
+                                                                                        </value>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <value name="AT2">
+                                                                                      <block type="math_arithmetic" id="uFEdo@u1ae|]4M(TewaH">
+                                                                                        <field name="OP">MINUS</field>
+                                                                                        <value name="A">
+                                                                                          <shadow type="math_number" id="_eSFU=]D5OFVV8GH)%1)">
+                                                                                            <field name="NUM">1</field>
+                                                                                          </shadow>
+                                                                                          <block type="text_indexOf" id="4MucAa14An6i)4`:SXYi">
+                                                                                            <field name="END">FIRST</field>
+                                                                                            <value name="VALUE">
+                                                                                              <block type="variables_get" id="8E~GUqXo;bO{Z3?-ER18">
+                                                                                                <field name="VAR" id="tomHFkqh05:rY9V|csIL">Rohdaten</field>
+                                                                                              </block>
+                                                                                            </value>
+                                                                                            <value name="FIND">
+                                                                                              <shadow type="text" id="PfS;|!;$+{y(J~99q.+]">
+                                                                                                <field name="TEXT">CET</field>
+                                                                                              </shadow>
+                                                                                            </value>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <value name="B">
+                                                                                          <shadow type="math_number" id="l-!q^?KkitqS7JUP#b%Q">
+                                                                                            <field name="NUM">2</field>
+                                                                                          </shadow>
+                                                                                        </value>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <next>
+                                                                                  <block type="update" id="u.POK$eM8k+}oh):geS!">
+                                                                                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                    <field name="OID">0_userdata.0.Server.Temp1</field>
+                                                                                    <field name="WITH_DELAY">FALSE</field>
+                                                                                    <value name="VALUE">
+                                                                                      <block type="math_rndfixed" id="/JxT#0.Q.uHAESp49d91">
+                                                                                        <field name="n">2</field>
+                                                                                        <value name="x">
+                                                                                          <shadow type="math_number" id="aR7*Wm7UH;2RiU)h%S=9">
+                                                                                            <field name="NUM">3.1234</field>
+                                                                                          </shadow>
+                                                                                          <block type="variables_get" id="7-@aX$)}hWw8Kr:,]g[!">
+                                                                                            <field name="VAR" id="**Ib=SkA6LekP#lvMuJ^">temp1</field>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <next>
+                                                                                      <block type="update" id="ay?}Z6[-rO_?PsZ=G=mC">
+                                                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                        <field name="OID">0_userdata.0.Server.Temp2</field>
+                                                                                        <field name="WITH_DELAY">FALSE</field>
+                                                                                        <value name="VALUE">
+                                                                                          <block type="math_rndfixed" id="*JvJlT_MAjoXO)ed1@Wv">
+                                                                                            <field name="n">2</field>
+                                                                                            <value name="x">
+                                                                                              <shadow type="math_number" id="Rv|(GcFtZAl4C]N:C=jD">
+                                                                                                <field name="NUM">3.1234</field>
+                                                                                              </shadow>
+                                                                                              <block type="variables_get" id="#;(E=3?rH,Pr^AM-Gmpj">
+                                                                                                <field name="VAR" id="8ZzE%8X]nt0:I^6_3VMm">temp2</field>
+                                                                                              </block>
+                                                                                            </value>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <next>
+                                                                                          <block type="update" id="npT%cM]Ps:%hag~V`B59">
+                                                                                            <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                            <field name="OID">0_userdata.0.Server.Temp3</field>
+                                                                                            <field name="WITH_DELAY">FALSE</field>
+                                                                                            <value name="VALUE">
+                                                                                              <block type="math_rndfixed" id="ic06bbF@~]d$W1YpcY)(">
+                                                                                                <field name="n">2</field>
+                                                                                                <value name="x">
+                                                                                                  <shadow type="math_number" id="+}HY:4l9|g7H[#Ax0G$Z">
+                                                                                                    <field name="NUM">3.1234</field>
+                                                                                                  </shadow>
+                                                                                                  <block type="variables_get" id="rxHgk$.%xNbG07r^v5V(">
+                                                                                                    <field name="VAR" id="[%jO6`/,K8V{3}uxVK;J">temp3</field>
+                                                                                                  </block>
+                                                                                                </value>
+                                                                                              </block>
+                                                                                            </value>
+                                                                                            <next>
+                                                                                              <block type="update" id="}*Zn,-XXN!(4_[I_^~.I">
+                                                                                                <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                                <field name="OID">0_userdata.0.Server.Temp4</field>
+                                                                                                <field name="WITH_DELAY">FALSE</field>
+                                                                                                <value name="VALUE">
+                                                                                                  <block type="math_rndfixed" id="q_~/Q](V^UM,C|2qx{%(">
+                                                                                                    <field name="n">2</field>
+                                                                                                    <value name="x">
+                                                                                                      <shadow type="math_number" id="i#HV~EFO}(Bg,-n|gx,O">
+                                                                                                        <field name="NUM">3.1234</field>
+                                                                                                      </shadow>
+                                                                                                      <block type="variables_get" id="|{OT`[,2R/(jksbV$-$8">
+                                                                                                        <field name="VAR" id=".U{XqMTrHIy_5RP-V.{B">temp4</field>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                  </block>
+                                                                                                </value>
+                                                                                                <next>
+                                                                                                  <block type="update" id="535yy(v-82V?5aQmk=AM">
+                                                                                                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                                    <field name="OID">0_userdata.0.Server.Temp5</field>
+                                                                                                    <field name="WITH_DELAY">FALSE</field>
+                                                                                                    <value name="VALUE">
+                                                                                                      <block type="math_rndfixed" id="sO4*kM/#h1KH=~P#zE;d">
+                                                                                                        <field name="n">2</field>
+                                                                                                        <value name="x">
+                                                                                                          <shadow type="math_number" id="gEPI9^1EMgvhbW8$4uIy">
+                                                                                                            <field name="NUM">3.1234</field>
+                                                                                                          </shadow>
+                                                                                                          <block type="variables_get" id="r!3VM,|b3^T7o0R[4K6c">
+                                                                                                            <field name="VAR" id="xeA)1ZQ!(8A59/%1z-dM">temp5</field>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                    <next>
+                                                                                                      <block type="update" id="xXgr^EdcMf5j9D]8MXEq">
+                                                                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                                        <field name="OID">0_userdata.0.Server.Temp6</field>
+                                                                                                        <field name="WITH_DELAY">FALSE</field>
+                                                                                                        <value name="VALUE">
+                                                                                                          <block type="math_rndfixed" id="(Q3mupnH$p9p[)S?=Gq_">
+                                                                                                            <field name="n">2</field>
+                                                                                                            <value name="x">
+                                                                                                              <shadow type="math_number" id="gEPI9^1EMgvhbW8$4uIy">
+                                                                                                                <field name="NUM">3.1234</field>
+                                                                                                              </shadow>
+                                                                                                              <block type="variables_get" id="ZHyEzp#~P%BG-%?n*3SU">
+                                                                                                                <field name="VAR" id="Kv$l_eSfSRs2$^V*B=7p">temp6</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <next>
+                                                                                                          <block type="update" id="`h^/-}G}JXLH41z_OhSM">
+                                                                                                            <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                                            <field name="OID">0_userdata.0.Server.Temp7</field>
+                                                                                                            <field name="WITH_DELAY">FALSE</field>
+                                                                                                            <value name="VALUE">
+                                                                                                              <block type="math_rndfixed" id="zqTiXOFg`e0xZ`1yd[N=">
+                                                                                                                <field name="n">2</field>
+                                                                                                                <value name="x">
+                                                                                                                  <shadow type="math_number" id="gEPI9^1EMgvhbW8$4uIy">
+                                                                                                                    <field name="NUM">3.1234</field>
+                                                                                                                  </shadow>
+                                                                                                                  <block type="variables_get" id="{t){||tP(?]#jlr6blu=">
+                                                                                                                    <field name="VAR" id="9N1bIs7|MNqf6@J$Cx(l">temp7</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <next>
+                                                                                                              <block type="update" id="%ErJy!uhp#Je$;jcyVTj">
+                                                                                                                <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                                                <field name="OID">0_userdata.0.Server.Temp8</field>
+                                                                                                                <field name="WITH_DELAY">FALSE</field>
+                                                                                                                <value name="VALUE">
+                                                                                                                  <block type="math_rndfixed" id="v3:0`HQDGa8=*M)V(#3w">
+                                                                                                                    <field name="n">2</field>
+                                                                                                                    <value name="x">
+                                                                                                                      <shadow type="math_number" id="gEPI9^1EMgvhbW8$4uIy">
+                                                                                                                        <field name="NUM">3.1234</field>
+                                                                                                                      </shadow>
+                                                                                                                      <block type="variables_get" id="]-21ym5#~TDruZN/|`P*">
+                                                                                                                        <field name="VAR" id="W#Bz+$Ui`niWW2AZ5NyY">temp8</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                                <next>
+                                                                                                                  <block type="update" id="aSEX}1$x;=`aE2hf{rr.">
+                                                                                                                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                                                    <field name="OID">0_userdata.0.Server.freeMemory</field>
+                                                                                                                    <field name="WITH_DELAY">FALSE</field>
+                                                                                                                    <value name="VALUE">
+                                                                                                                      <block type="variables_get" id="V%vesZ%0Uu1X/AH7tv)}">
+                                                                                                                        <field name="VAR" id="c_}aw0{Bw}SE-~m{dEtU">ServerRAMfrei</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                    <next>
+                                                                                                                      <block type="update" id="f)_k*!Ioer1//QMGXRv5">
+                                                                                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                                                        <field name="OID">0_userdata.0.Server.uptime</field>
+                                                                                                                        <field name="WITH_DELAY">FALSE</field>
+                                                                                                                        <value name="VALUE">
+                                                                                                                          <block type="variables_get" id="sr$8Ruz5:7xzKK+{.YZ0">
+                                                                                                                            <field name="VAR" id="];C3y*KgHVc:w:ZeMnpy">Laufzeit</field>
+                                                                                                                          </block>
+                                                                                                                        </value>
+                                                                                                                        <next>
+                                                                                                                          <block type="update" id="IcW5q1BzfP2T=q=Gbneo">
+                                                                                                                            <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                                                            <field name="OID">0_userdata.0.Server.average</field>
+                                                                                                                            <field name="WITH_DELAY">FALSE</field>
+                                                                                                                            <value name="VALUE">
+                                                                                                                              <block type="variables_get" id="QoEMOmT^{^fr9J.bQ5Kl">
+                                                                                                                                <field name="VAR" id="Ne_fic?ipdES$(phY^oC">ServerCPUauslastung</field>
+                                                                                                                              </block>
+                                                                                                                            </value>
+                                                                                                                            <next>
+                                                                                                                              <block type="update" id="xr4;];8|IoU`F?p}Rkt]">
+                                                                                                                                <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                                                                <field name="OID">0_userdata.0.Server.freeDiskspace</field>
+                                                                                                                                <field name="WITH_DELAY">FALSE</field>
+                                                                                                                                <value name="VALUE">
+                                                                                                                                  <block type="variables_get" id="L+,lzpWC}EQ5cSak{/.C">
+                                                                                                                                    <field name="VAR" id=";.RpLVdg`t;7yYPCU!kM">Harddisk_free</field>
+                                                                                                                                  </block>
+                                                                                                                                </value>
+                                                                                                                                <next>
+                                                                                                                                  <block type="update" id="fP:w*#xmm/9#9ObMaN:c">
+                                                                                                                                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                                                                    <field name="OID">0_userdata.0.Server.usedDiskspace</field>
+                                                                                                                                    <field name="WITH_DELAY">FALSE</field>
+                                                                                                                                    <value name="VALUE">
+                                                                                                                                      <block type="variables_get" id="Slsq-$s8|}xW3NZ-nNE+">
+                                                                                                                                        <field name="VAR" id="d!I^r0=G3?:ew$B1|nMN">Harddisk_used</field>
+                                                                                                                                      </block>
+                                                                                                                                    </value>
+                                                                                                                                    <next>
+                                                                                                                                      <block type="update" id="N!HHnRlyqr1n@7M[EIsk">
+                                                                                                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                                                                                                        <field name="OID">0_userdata.0.Server.letztes_FutroBackup</field>
+                                                                                                                                        <field name="WITH_DELAY">FALSE</field>
+                                                                                                                                        <value name="VALUE">
+                                                                                                                                          <block type="variables_get" id="i=Hg9zL9]#iYO/t{;}vX">
+                                                                                                                                            <field name="VAR" id="A,D*IhnDPkg7*+0BuYlJ">FutroBackup</field>
+                                                                                                                                          </block>
+                                                                                                                                        </value>
+                                                                                                                                      </block>
+                                                                                                                                    </next>
+                                                                                                                                  </block>
+                                                                                                                                </next>
+                                                                                                                              </block>
+                                                                                                                            </next>
+                                                                                                                          </block>
+                                                                                                                        </next>
+                                                                                                                      </block>
+                                                                                                                    </next>
+                                                                                                                  </block>
+                                                                                                                </next>
+                                                                                                              </block>
+                                                                                                            </next>
+                                                                                                          </block>
+                                                                                                        </next>
+                                                                                                      </block>
+                                                                                                    </next>
+                                                                                                  </block>
+                                                                                                </next>
+                                                                                              </block>
+                                                                                            </next>
+                                                                                          </block>
+                                                                                        </next>
+                                                                                      </block>
+                                                                                    </next>
+                                                                                  </block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </next>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
