@@ -52,7 +52,7 @@
                     <field name="LOG"></field>
                     <value name="URL">
                       <shadow type="text" id="Z_t@R5/fWn:?Oh[VbHR4">
-                        <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=27&amp;Standort=1020</field>
+                        <field name="TEXT">Status=27&amp;Standort=1020</field>
                       </shadow>
                     </value>
                   </block>
@@ -138,7 +138,7 @@
                         <field name="LOG"></field>
                         <value name="URL">
                           <shadow type="text" id="+UHLbl2?!t5)S}@]l6?2">
-                            <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=27&amp;Standort=1021</field>
+                            <field name="TEXT">Status=27&amp;Standort=1021</field>
                           </shadow>
                         </value>
                       </block>
@@ -226,7 +226,7 @@
                                 <field name="LOG"></field>
                                 <value name="URL">
                                   <shadow type="text" id="lYxAy3)X2I_%.f}hw1)z">
-                                    <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=70&amp;Standort=1020</field>
+                                    <field name="TEXT">Status=70&amp;Standort=1020</field>
                                   </shadow>
                                 </value>
                               </block>
@@ -250,7 +250,7 @@
                                 <field name="LOG"></field>
                                 <value name="URL">
                                   <shadow type="text" id="YDBz%2X8X[ifix;6CABt">
-                                    <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=71&amp;Standort=1020</field>
+                                    <field name="TEXT">Status=71&amp;Standort=1020</field>
                                   </shadow>
                                 </value>
                               </block>
@@ -289,7 +289,7 @@
                                     <field name="LOG"></field>
                                     <value name="URL">
                                       <shadow type="text" id=".w?18e+m!7[!!2t4.?*(">
-                                        <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=70&amp;Standort=1022</field>
+                                        <field name="TEXT">Status=70&amp;Standort=1022</field>
                                       </shadow>
                                     </value>
                                   </block>
@@ -313,7 +313,7 @@
                                     <field name="LOG"></field>
                                     <value name="URL">
                                       <shadow type="text" id="gtc/(e]t)3n)zfZZCr?A">
-                                        <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=71&amp;Standort=1022</field>
+                                        <field name="TEXT">Status=71&amp;Standort=1022</field>
                                       </shadow>
                                     </value>
                                   </block>
