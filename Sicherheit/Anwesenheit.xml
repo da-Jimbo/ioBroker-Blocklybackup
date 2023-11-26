@@ -1,0 +1,296 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="KD)K395=Bs4G@R}v25?u">AnwesenheitTV</variable>
+    <variable id="BVHco}BT(u%UTce?XQ}^">AnwesenheitChriss</variable>
+    <variable id="bg^=D==#qL1DQF)XF`l3">AnwesenheitLisa</variable>
+    <variable id="4fFF*HI{_EGTih*y}Iz1">Anwesenheit</variable>
+  </variables>
+  <block type="on_ext" id="A;9LfH2J}pPyJYwDzTUF" x="287" y="-355">
+    <mutation xmlns="http://www.w3.org/1999/xhtml" items="4"></mutation>
+    <field name="CONDITION">ne</field>
+    <field name="ACK_CONDITION"></field>
+    <value name="OID0">
+      <shadow type="field_oid" id="4}o:sz6AAp-$4Q:E2SlN">
+        <field name="oid">ping.0.ioBroker-Futro.192_168_1_101.alive</field>
+      </shadow>
+    </value>
+    <value name="OID1">
+      <shadow type="field_oid" id=":igO|TDa#Dq0}7NuI%BK">
+        <field name="oid">ping.0.ioBroker-Futro.192_168_1_221.alive</field>
+      </shadow>
+    </value>
+    <value name="OID2">
+      <shadow type="field_oid" id="}z~:a{A6Ki9jSqH,~N!w">
+        <field name="oid">ping.0.ioBroker-Futro.192_168_1_99.alive</field>
+      </shadow>
+    </value>
+    <value name="OID3">
+      <shadow type="field_oid" id="1OJSB(sa9$tsUsgt74!}">
+        <field name="oid">ping.0.ioBroker-Futro.192_168_1_220.alive</field>
+      </shadow>
+    </value>
+    <statement name="STATEMENT">
+      <block type="comment" id="m9]s.lL1Aqn;wjjUL[@]">
+        <field name="COMMENT">Checkt die Anwesenheit</field>
+        <next>
+          <block type="controls_if" id="s(`([LX(f%*%5VT]YG;N">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="get_value" id="G!BZ9J}f1YKhH4CA_;mV">
+                <field name="ATTR">val</field>
+                <field name="OID">ping.0.ioBroker-Futro.192_168_1_109.alive</field>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set" id="_/@7kHecJ}]|ts,yT-FX">
+                <field name="VAR" id="KD)K395=Bs4G@R}v25?u">AnwesenheitTV</field>
+                <value name="VALUE">
+                  <block type="math_number" id="g7j*1Se~mQpHgAJI}u2%">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="variables_set" id="Kv{Im[{5M5]jGL{Tv/vl">
+                <field name="VAR" id="KD)K395=Bs4G@R}v25?u">AnwesenheitTV</field>
+                <value name="VALUE">
+                  <block type="math_number" id="6j@s%[Oe-MH8@cfRQC!_">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="controls_if" id="kj=aNuAoz6lx@@komnE)">
+                <mutation else="1"></mutation>
+                <value name="IF0">
+                  <block type="get_value" id="d5arvbJyg.k;E2j)hPzX">
+                    <field name="ATTR">val</field>
+                    <field name="OID">ping.0.ioBroker-Futro.192_168_1_99.alive</field>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="variables_set" id="DzYr#:IUd5D9(#a(zC/%">
+                    <field name="VAR" id="BVHco}BT(u%UTce?XQ}^">AnwesenheitChriss</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="oVJh{?cgRFRuiPZ.*{9c">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="variables_set" id="SwGD[3;JI:C@fnS.`act">
+                    <field name="VAR" id="BVHco}BT(u%UTce?XQ}^">AnwesenheitChriss</field>
+                    <value name="VALUE">
+                      <block type="math_number" id=",O]#U095T}kUz|?RK]JW">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="e/kA|`DrUTNoLxrie8tD">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="get_value" id="M,(L4{SKj@pIZGOOo3nk">
+                        <field name="ATTR">val</field>
+                        <field name="OID">ping.0.ioBroker-Futro.192_168_1_101.alive</field>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="variables_set" id="v_6|g^r!HJ57NUHo`?|#">
+                        <field name="VAR" id="BVHco}BT(u%UTce?XQ}^">AnwesenheitChriss</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="SY+bcEbvUd4Xl%2%Ik;}">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="variables_set" id="NgpH1D86?1nRq0eKiht5">
+                        <field name="VAR" id="BVHco}BT(u%UTce?XQ}^">AnwesenheitChriss</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="hM08GfjyrM%L+{f,?/P0">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="controls_if" id="5lJ)Yuheg+PS=VODxB/5">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                          <block type="get_value" id="AlR7AL%$}9YG{F`Pluos">
+                            <field name="ATTR">val</field>
+                            <field name="OID">ping.0.ioBroker-Futro.192_168_1_220.alive</field>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="variables_set" id="BhiG,qIsvHB0:|#}vu+%">
+                            <field name="VAR" id="bg^=D==#qL1DQF)XF`l3">AnwesenheitLisa</field>
+                            <value name="VALUE">
+                              <block type="math_number" id="uK]-cQ1sQZ-z^$-w_3V$">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="variables_set" id="3y`jvT6dS.rC#34xmV_c">
+                            <field name="VAR" id="bg^=D==#qL1DQF)XF`l3">AnwesenheitLisa</field>
+                            <value name="VALUE">
+                              <block type="math_number" id="Djr`Vc|M+%x7pwfFUth7">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="controls_if" id="21;#@unPUyzPds{}Aga)">
+                            <mutation else="1"></mutation>
+                            <value name="IF0">
+                              <block type="get_value" id="!a-~}O26|CJ{o_WmhIf-">
+                                <field name="ATTR">val</field>
+                                <field name="OID">ping.0.ioBroker-Futro.192_168_1_221.alive</field>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="variables_set" id="n/#g6:ulTVJvA|ikUhs;">
+                                <field name="VAR" id="bg^=D==#qL1DQF)XF`l3">AnwesenheitLisa</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="+JO_SqY@1Jr8Ndq-6gUu">
+                                    <field name="NUM">1</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <statement name="ELSE">
+                              <block type="variables_set" id="Fh/}G?n#8PdYQ(v6meGk">
+                                <field name="VAR" id="bg^=D==#qL1DQF)XF`l3">AnwesenheitLisa</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="yx4_iuN6T@F:YZ@v-[{`">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="variables_set" id="V16_w.`9eV=m7GCPU7Ai">
+                                <field name="VAR" id="4fFF*HI{_EGTih*y}Iz1">Anwesenheit</field>
+                                <value name="VALUE">
+                                  <block type="math_arithmetic" id="cie[L#+PMvJ6tJmXYf)W">
+                                    <field name="OP">ADD</field>
+                                    <value name="A">
+                                      <shadow type="math_number" id="TzEfK,T/w{z[7M4,xKX9">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="math_arithmetic" id="FpxA=LjS|C!;dLhcvWU8">
+                                        <field name="OP">ADD</field>
+                                        <value name="A">
+                                          <shadow type="math_number" id="eIOz5vS}gM(W@G!j=t;#">
+                                            <field name="NUM">1</field>
+                                          </shadow>
+                                          <block type="variables_get" id="QjIj%eOZ/U]wQHo,YXpJ">
+                                            <field name="VAR" id="BVHco}BT(u%UTce?XQ}^">AnwesenheitChriss</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <shadow type="math_number" id="5OV0bo,vKljLdp7R3*YT">
+                                            <field name="NUM">1</field>
+                                          </shadow>
+                                          <block type="variables_get" id="c#Eke51pH2(*[+e?L;7,">
+                                            <field name="VAR" id="bg^=D==#qL1DQF)XF`l3">AnwesenheitLisa</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <shadow type="math_number" id="4b%t-3BEAif}qeZa!2@s">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="variables_get" id="J!zkrz[V=cXwI-cqd,;L">
+                                        <field name="VAR" id="KD)K395=Bs4G@R}v25?u">AnwesenheitTV</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="update" id="0,YqTCW0L@W#~GfLgTmA">
+                                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                    <field name="OID">0_userdata.0.Anwesenheit.Devices</field>
+                                    <field name="WITH_DELAY">FALSE</field>
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="*:(yE4lfiYbq/c,4}Y}q">
+                                        <field name="VAR" id="4fFF*HI{_EGTih*y}Iz1">Anwesenheit</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="comment" id="f4H4Gp4|$~.2CQ3#`DZK">
+                                        <field name="COMMENT">Setzt die Anwesenheit</field>
+                                        <next>
+                                          <block type="controls_if" id="hXEQ/}McTA$G5p^5:~.F">
+                                            <mutation else="1"></mutation>
+                                            <value name="IF0">
+                                              <block type="logic_compare" id="2T?~{X6c5(SQwZyN:sXJ">
+                                                <field name="OP">LT</field>
+                                                <value name="A">
+                                                  <block type="variables_get" id="MDzc9$x,4XEG-s=#h@A9">
+                                                    <field name="VAR" id="4fFF*HI{_EGTih*y}Iz1">Anwesenheit</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="math_number" id="[0zeUh8}kK_/Kig@xn|T">
+                                                    <field name="NUM">1</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="update" id="ZH{@b5Y?%E(9EGV:qzv_">
+                                                <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                <field name="OID">0_userdata.0.Anwesenheit.Anwesenheit</field>
+                                                <field name="WITH_DELAY">FALSE</field>
+                                                <value name="VALUE">
+                                                  <block type="logic_boolean" id="!eaa4s_Oe%s~zHK}rbJQ">
+                                                    <field name="BOOL">FALSE</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                            <statement name="ELSE">
+                                              <block type="update" id="aOZtE:l%LO,ND)61%g49">
+                                                <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                <field name="OID">0_userdata.0.Anwesenheit.Anwesenheit</field>
+                                                <field name="WITH_DELAY">FALSE</field>
+                                                <value name="VALUE">
+                                                  <block type="logic_boolean" id=";3zWg%Es_J}QNDS{[9Tt">
+                                                    <field name="BOOL">TRUE</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
