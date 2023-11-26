@@ -1,0 +1,499 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable type="cron" id="Tagesnummer">Tagesnummer</variable>
+    <variable id="Rn+Zm~7CY[Sa{0^d$5k3">Jahr</variable>
+    <variable id="fU~CpM.ZmX-]K`=L-g^3">Tagesnummer</variable>
+    <variable id="+Q]Ix!kzl0gP]dp4v0$J">bisWeihnachten</variable>
+    <variable type="cron" id="Tagesnummer">Tagesnummer</variable>
+    <variable id="3wQU@fzJ_41?u{F8`mbn">TageWoche</variable>
+    <variable id="QX}@sAy5#7j?l}#nfQMP">TageMonat</variable>
+  </variables>
+  <block type="comment" id="1sFck~9$~Urd=T$uEB;Y" x="38" y="13">
+    <field name="COMMENT">Um 00:15Uhr aktualisieren wegen Regenmenge</field>
+    <next>
+      <block type="comment" id="e$|R#p@vKe8f08Cv4uY^">
+        <field name="COMMENT">Siehe Tageswert Regenmenge</field>
+        <next>
+          <block type="schedule_create" id="2#gDzo:ziWkq[^1F58%C">
+            <field name="NAME">Tagesnummer</field>
+            <value name="SCHEDULE">
+              <shadow type="field_cron" id="e$*TPQ.a[}+?Nk40tx(;">
+                <field name="CRON">15 0 * * *</field>
+              </shadow>
+            </value>
+            <statement name="STATEMENT">
+              <block type="variables_set" id="eBhtCkubNF}FeW7?$E?w">
+                <field name="VAR" id="Rn+Zm~7CY[Sa{0^d$5k3">Jahr</field>
+                <value name="VALUE">
+                  <block type="time_get" id="p5611k.=Jq$=_Twpo9=i">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                    <field name="OPTION">fy</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="5OC$Jvws2utC*+!/t##C">
+                    <field name="VAR" id="fU~CpM.ZmX-]K`=L-g^3">Tagesnummer</field>
+                    <value name="VALUE">
+                      <block type="convert_tonumber" id="c!)HJLBSVr;=15Es4Mmc">
+                        <value name="VALUE">
+                          <block type="math_round" id="v@KXW4hd-=/fUam[8NLj">
+                            <field name="OP">ROUNDDOWN</field>
+                            <value name="NUM">
+                              <shadow type="math_number" id="JrrT6[5po2*hImC#TWnz">
+                                <field name="NUM">3.1</field>
+                              </shadow>
+                              <block type="math_arithmetic" id="*WW,9/Itd2:Dn{QF=@)," inline="false">
+                                <field name="OP">DIVIDE</field>
+                                <value name="A">
+                                  <shadow type="math_number" id="Uj;au?407-/IYQ)piLv.">
+                                    <field name="NUM">1</field>
+                                  </shadow>
+                                  <block type="math_arithmetic" id="(z|aGh(1g]qLITUoQDP|" inline="false">
+                                    <field name="OP">MINUS</field>
+                                    <value name="A">
+                                      <shadow type="math_number" id=")oma(3@@hN3DYdF@DABR">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="time_get" id="RcUhh:!)0jEduYL41Xid">
+                                        <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                                        <field name="OPTION">object</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <shadow type="math_number" id="fO%#6cEh?c4P7Vhb/#GX">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="convert_from_date" id="lghWLR*OuCTz:0)XH$_Q">
+                                        <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                                        <field name="OPTION">object</field>
+                                        <value name="VALUE">
+                                          <block type="text_join" id=";^_q!.bnMoT`{k-w(@hA">
+                                            <mutation items="2"></mutation>
+                                            <value name="ADD0">
+                                              <block type="text" id="@jQb9rvd52*!mEc]@?:H">
+                                                <field name="TEXT">01.01.</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD1">
+                                              <block type="variables_get" id="N)ZUh{?Yg[h3CI34lF5r">
+                                                <field name="VAR" id="Rn+Zm~7CY[Sa{0^d$5k3">Jahr</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <shadow type="math_number" id="WeUyK#JII4^Kz$fnc4x5">
+                                    <field name="NUM">1</field>
+                                  </shadow>
+                                  <block type="math_number" id="^zC8;Q*R$WF$.sGZ3BOC">
+                                    <field name="NUM">86400000</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="(Nl)U/~CfY]M0lHX^JYC" collapsed="true">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_compare" id="c8F]!3?_A[A/RJfNBSJK">
+                            <field name="OP">LT</field>
+                            <value name="A">
+                              <block type="time_get" id="y.fIBx3pt]/tn.niUdec">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                                <field name="OPTION">object</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="convert_from_date" id="Lh^IAP3`^Y]`Cl=/~Y2=">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                                <field name="OPTION">object</field>
+                                <value name="VALUE">
+                                  <block type="text_join" id=",f~F7+}Co/PhOQ`F%$DD">
+                                    <mutation items="2"></mutation>
+                                    <value name="ADD0">
+                                      <block type="text" id="hUt91[g.bng%S*F1avCA">
+                                        <field name="TEXT">12.24.</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="variables_get" id="}9KX0p1`zuWxMs!+l1*T">
+                                        <field name="VAR" id="Rn+Zm~7CY[Sa{0^d$5k3">Jahr</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="variables_set" id="f`.Mm9PAj?HM?@9iVPk_">
+                            <field name="VAR" id="+Q]Ix!kzl0gP]dp4v0$J">bisWeihnachten</field>
+                            <value name="VALUE">
+                              <block type="convert_tonumber" id="w]2,0w.%m/[%wCnwA!GR">
+                                <value name="VALUE">
+                                  <block type="math_round" id="vlIW/52Bm(6Kb]^+yDAf">
+                                    <field name="OP">ROUNDDOWN</field>
+                                    <value name="NUM">
+                                      <shadow type="math_number" id="mS`ZKl(5d:t#t`BUr5?!">
+                                        <field name="NUM">3.1</field>
+                                      </shadow>
+                                      <block type="math_arithmetic" id="w-Sf6$4lj0eaL/2z3|2t" inline="false">
+                                        <field name="OP">DIVIDE</field>
+                                        <value name="A">
+                                          <shadow type="math_number" id="nZ?8nn$MkQ~;Z*yvI6.6">
+                                            <field name="NUM">1</field>
+                                          </shadow>
+                                          <block type="math_arithmetic" id="Nk6jbSxrytLGKza*hl`|" inline="false">
+                                            <field name="OP">MINUS</field>
+                                            <value name="A">
+                                              <shadow type="math_number" id="L6?cPN,nOE-,8!G.nyy3">
+                                                <field name="NUM">1</field>
+                                              </shadow>
+                                              <block type="convert_from_date" id="ito`QQi6tne^kWem-wU)">
+                                                <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                                                <field name="OPTION">object</field>
+                                                <value name="VALUE">
+                                                  <block type="text_join" id="Mp(XdnYc#[H@t^l.}3_i">
+                                                    <mutation items="2"></mutation>
+                                                    <value name="ADD0">
+                                                      <block type="text" id="@{%.$mBjw)Iq9yI`G/w(">
+                                                        <field name="TEXT">12.24.</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="ADD1">
+                                                      <block type="variables_get" id="89PD#a?Rp8d$v=#3V++e">
+                                                        <field name="VAR" id="Rn+Zm~7CY[Sa{0^d$5k3">Jahr</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <shadow type="math_number" id="tUf^kATp./%uvtUMKZLy">
+                                                <field name="NUM">1</field>
+                                              </shadow>
+                                              <block type="time_get" id="tlkZ4nGC_7A@|+TP-J%1">
+                                                <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                                                <field name="OPTION">object</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <shadow type="math_number" id="JLR%,13bg:~;2XS!Oe.$">
+                                            <field name="NUM">1</field>
+                                          </shadow>
+                                          <block type="math_number" id="A:bz#w/;Z|`5olsI]_Zc">
+                                            <field name="NUM">86400000</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="variables_set" id=",Jt^fI%bwg7l6ZLTyV0f">
+                            <field name="VAR" id="+Q]Ix!kzl0gP]dp4v0$J">bisWeihnachten</field>
+                            <value name="VALUE">
+                              <block type="convert_tonumber" id="2O|47$YYImDJl[2-Jp@~">
+                                <value name="VALUE">
+                                  <block type="math_round" id="DtU:BT2}~So@jb[+8K}Q">
+                                    <field name="OP">ROUNDDOWN</field>
+                                    <value name="NUM">
+                                      <shadow type="math_number" id="infPx1Dq{oM%rhvd/H*?">
+                                        <field name="NUM">3.1</field>
+                                      </shadow>
+                                      <block type="math_arithmetic" id="*Sg]L*PO*wxsoVrRj}}#" inline="false">
+                                        <field name="OP">DIVIDE</field>
+                                        <value name="A">
+                                          <shadow type="math_number" id="X-aaBCiNw=(oEYUEv.l8">
+                                            <field name="NUM">1</field>
+                                          </shadow>
+                                          <block type="math_arithmetic" id="#=-3EC!nv|Ei[PGH#=VB" inline="false">
+                                            <field name="OP">MINUS</field>
+                                            <value name="A">
+                                              <shadow type="math_number" id="fIy9aWmi[vJi(:_)dVzZ">
+                                                <field name="NUM">1</field>
+                                              </shadow>
+                                              <block type="convert_from_date" id="]Pw2|?Cf%6)V;o5y))}f">
+                                                <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                                                <field name="OPTION">object</field>
+                                                <value name="VALUE">
+                                                  <block type="text_join" id="=Z`_ZQ0xH@(bZw5VW@r!">
+                                                    <mutation items="2"></mutation>
+                                                    <value name="ADD0">
+                                                      <block type="text" id="OLvG|dm+(Bd52nsH6|^W">
+                                                        <field name="TEXT">12.24.</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="ADD1">
+                                                      <block type="math_arithmetic" id="`_QT$yzB2u*2#afvr$Tm">
+                                                        <field name="OP">ADD</field>
+                                                        <value name="A">
+                                                          <shadow type="math_number" id="vhITfF6i[{2Q3,Qfe8Sg">
+                                                            <field name="NUM">1</field>
+                                                          </shadow>
+                                                          <block type="variables_get" id="+^VqbaO):~5et`cVCXXH">
+                                                            <field name="VAR" id="Rn+Zm~7CY[Sa{0^d$5k3">Jahr</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="B">
+                                                          <shadow type="math_number" id="GskoHEgEwkmDMT2}GiED">
+                                                            <field name="NUM">1</field>
+                                                          </shadow>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <shadow type="math_number" id="p2,u3r4twIxR~{S/RkO7">
+                                                <field name="NUM">1</field>
+                                              </shadow>
+                                              <block type="time_get" id="O!JGNMlfP+Lrv::FoA(^">
+                                                <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                                                <field name="OPTION">object</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <shadow type="math_number" id="?v~:SyL9ZWv!!2)Z#[bP">
+                                            <field name="NUM">1</field>
+                                          </shadow>
+                                          <block type="math_number" id="xSRo7dYGiLRO!5Q2FcX$">
+                                            <field name="NUM">86400000</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="math_change" id="1}IBXbDLJw1y~z{IKH)W">
+                            <field name="VAR" id="Tagesnummer" variabletype="cron">Tagesnummer</field>
+                            <value name="DELTA">
+                              <shadow type="math_number" id="QM!UY`a^603rY@m;2u9X">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="math_change" id="uEjAGy]E*Jnd,}TgZIid">
+                                <field name="VAR" id="+Q]Ix!kzl0gP]dp4v0$J">bisWeihnachten</field>
+                                <value name="DELTA">
+                                  <shadow type="math_number" id="_}.yzG`KpA+)=uNY`OhB">
+                                    <field name="NUM">1</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="update" id="$zO,x/m{`ATCxIMETiM/">
+                                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                    <field name="OID">0_userdata.0.Zeitfunktionen.Tagesnummer</field>
+                                    <field name="WITH_DELAY">FALSE</field>
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="W?;6h?M?^gX#z:lAV,~p">
+                                        <field name="VAR" id="fU~CpM.ZmX-]K`=L-g^3">Tagesnummer</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="update" id="AUCqZsGCUpc7*$F[[4oj">
+                                        <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                        <field name="OID">0_userdata.0.Zeitfunktionen.bisWeihnachten</field>
+                                        <field name="WITH_DELAY">FALSE</field>
+                                        <value name="VALUE">
+                                          <block type="variables_get" id="hZZ6{^4P[]j?I_]Oz+Wy">
+                                            <field name="VAR" id="+Q]Ix!kzl0gP]dp4v0$J">bisWeihnachten</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="on" id="Zn3z^.^0*]?UE:;!D/x7">
+                <field name="OID">0_userdata.0.Zeitfunktionen.Tagesnummer</field>
+                <field name="CONDITION">ne</field>
+                <field name="ACK_CONDITION"></field>
+                <statement name="STATEMENT">
+                  <block type="comment" id="n%F.I?d$EgUq0O!*45Zr">
+                    <field name="COMMENT">Für die Berechnung der Durchschnittswerte</field>
+                    <next>
+                      <block type="comment" id="3k%D9cg6.~^$DAUERk59">
+                        <field name="COMMENT">Jahrestag  - 1 Woche</field>
+                        <next>
+                          <block type="controls_if" id="{B7fcgjstS)#pm~$ikz6">
+                            <mutation else="1"></mutation>
+                            <value name="IF0">
+                              <block type="logic_compare" id="1mWb/y;][!$Hggm(@3dU">
+                                <field name="OP">GTE</field>
+                                <value name="A">
+                                  <block type="on_source" id=":0+@M?,,-jU!A$.d5]`(">
+                                    <field name="ATTR">state.val</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="/]kG6+GuT!*MVb7NhMdW">
+                                    <field name="NUM">7</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="variables_set" id="y[MM)*G/jm4A,hkYO4nt">
+                                <field name="VAR" id="3wQU@fzJ_41?u{F8`mbn">TageWoche</field>
+                                <value name="VALUE">
+                                  <block type="math_arithmetic" id="cvD+=_V)tb#1xmKBbWJ(">
+                                    <field name="OP">MINUS</field>
+                                    <value name="A">
+                                      <shadow type="math_number" id="WF.]o+-!5`#LBbw!IB2s">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                      <block type="on_source" id="ZJQHx-Ks@chD:/8xvi%x">
+                                        <field name="ATTR">state.val</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <shadow type="math_number" id="5H3SXDC@D,I7K;X=Z.-.">
+                                        <field name="NUM">6</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <statement name="ELSE">
+                              <block type="variables_set" id="s8I~[]@UJ]yx[7nZ?c.~">
+                                <field name="VAR" id="3wQU@fzJ_41?u{F8`mbn">TageWoche</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="pMq*R2?*iO{-E~G~:Tdb">
+                                    <field name="NUM">1</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="update" id="}{d4lvEp]Gj5;{g3jf`n">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                <field name="OID">0_userdata.0.Zeitfunktionen.Durchschnittstag_Woche</field>
+                                <field name="WITH_DELAY">FALSE</field>
+                                <value name="VALUE">
+                                  <block type="variables_get" id="a;/:(KZ.;S|%30@bY4Mz">
+                                    <field name="VAR" id="3wQU@fzJ_41?u{F8`mbn">TageWoche</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="comment" id="vHt50#~?[D=MJ1aUv)j6">
+                                    <field name="COMMENT">Jahrestag - 1 Monat</field>
+                                    <next>
+                                      <block type="controls_if" id="$~c:OUIq2uNkuNk]bMz@">
+                                        <mutation else="1"></mutation>
+                                        <value name="IF0">
+                                          <block type="logic_compare" id="L_cCoAz.DJ+.hHT?QL=Y">
+                                            <field name="OP">GTE</field>
+                                            <value name="A">
+                                              <block type="on_source" id="ys;,a+v-~Mx,@d7NfIj)">
+                                                <field name="ATTR">state.val</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number" id="}:@uF`a*8u6ha6u[;([f">
+                                                <field name="NUM">30</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="variables_set" id="vkE+NTsuS24E=4rbETm@">
+                                            <field name="VAR" id="QX}@sAy5#7j?l}#nfQMP">TageMonat</field>
+                                            <value name="VALUE">
+                                              <block type="math_arithmetic" id="y_)C6i9UEZtGJ#+^`]#n">
+                                                <field name="OP">MINUS</field>
+                                                <value name="A">
+                                                  <shadow type="math_number" id="Y%Q}zqn*0tPwp+c#Vs,J">
+                                                    <field name="NUM">1</field>
+                                                  </shadow>
+                                                  <block type="on_source" id="IR`fe^XTW|H-CGUu_WVz">
+                                                    <field name="ATTR">state.val</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <shadow type="math_number" id="eON]RJ$5=,Q,L,+!vIo2">
+                                                    <field name="NUM">29</field>
+                                                  </shadow>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <statement name="ELSE">
+                                          <block type="variables_set" id="aD~]b#g80hX!`cr!@4uU">
+                                            <field name="VAR" id="QX}@sAy5#7j?l}#nfQMP">TageMonat</field>
+                                            <value name="VALUE">
+                                              <block type="math_number" id="I0V@kp_HNI@~_]V1${]f">
+                                                <field name="NUM">1</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="update" id="JV~9[IAZssJ3%$bOxD?W">
+                                            <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                            <field name="OID">0_userdata.0.Zeitfunktionen.Durchschnittstag_Monat</field>
+                                            <field name="WITH_DELAY">FALSE</field>
+                                            <value name="VALUE">
+                                              <block type="variables_get" id="2w!%7W=m6-apFUw2H4{`">
+                                                <field name="VAR" id="QX}@sAy5#7j?l}#nfQMP">TageMonat</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
