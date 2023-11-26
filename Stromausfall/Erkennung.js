@@ -1,62 +1,503 @@
-var Ping_Versuche, Versuche, AnzahlOnline, Text2, i, ShellyOnline;
-
-
-on({ id: '0_userdata.0.Haustechnik.Netzwerk.Stromausfall_Versuche' /* Stromausfall_Versuche */, change: 'ne' }, async (obj) => {
-  let value = obj.state.val;
-  let oldValue = obj.oldState.val;
-  if ((obj.state ? obj.state.val : "") == 5) {
-    console.warn('Stromausfall vermutet');
-    Versuche = 0;
-    while ((obj.state ? obj.state.val : "") == 5) {
-      if (Versuche >= 10) {
-        console.error('Stromausfall erkannt!');
-        await wait(60000);
-        break;
-      } else {
-        Versuche = (typeof Versuche === 'number' ? Versuche : 0) + 1;
-        console.log((['Versuch ',Versuche,' von 10'].join('')));
-        await wait(120000);
-      }
-    }
-  } else {
-    console.log((String((obj.state ? obj.state.val : "")) + ' Netzwerkgeräte sind Offline!'));
-  }
-});
-on({ id: [].concat(['ping.0.ioBroker-Futro.192_168_1_1.alive']).concat(['ping.0.ioBroker-Futro.192_168_1_6.alive']).concat(['ping.0.ioBroker-Futro.192_168_1_7.alive']).concat(['ping.0.ioBroker-Futro.192_168_1_8.alive']).concat(['ping.0.ioBroker-Futro.192_168_1_9.alive']), change: 'ne' }, async (obj) => {
-  Ping_Versuche = 0;
-  if (!getState('ping.0.ioBroker-Futro.192_168_1_1.alive').val) {
-    Ping_Versuche = (typeof Ping_Versuche === 'number' ? Ping_Versuche : 0) + 1;
-  }
-  if (!getState('ping.0.ioBroker-Futro.192_168_1_6.alive').val) {
-    Ping_Versuche = (typeof Ping_Versuche === 'number' ? Ping_Versuche : 0) + 1;
-  }
-  if (!getState('ping.0.ioBroker-Futro.192_168_1_7.alive').val) {
-    Ping_Versuche = (typeof Ping_Versuche === 'number' ? Ping_Versuche : 0) + 1;
-  }
-  if (!getState('ping.0.ioBroker-Futro.192_168_1_8.alive').val) {
-    Ping_Versuche = (typeof Ping_Versuche === 'number' ? Ping_Versuche : 0) + 1;
-  }
-  if (!getState('ping.0.ioBroker-Futro.192_168_1_9.alive').val) {
-    Ping_Versuche = (typeof Ping_Versuche === 'number' ? Ping_Versuche : 0) + 1;
-  }
-  setState('0_userdata.0.Haustechnik.Netzwerk.Stromausfall_Versuche' /* Stromausfall_Versuche */, Ping_Versuche, true);
-});
-on({ id: [].concat(Array.prototype.slice.apply($('state[id=*](functions=shellyonline)'))), change: 'ne' }, async (obj) => {
-  let value = obj.state.val;
-  let oldValue = obj.oldState.val;
-  AnzahlOnline = 0;
-  Text2 = [];
-  var i_list = Array.prototype.slice.apply($('state[id=*](functions=shellyonline)'));
-  for (var i_index in i_list) {
-    i = i_list[i_index];
-    ShellyOnline = [i,'=',getState(i).val].join('');
-    if (getState(i).val) {
-      AnzahlOnline = (typeof AnzahlOnline === 'number' ? AnzahlOnline : 0) + 1;
-    }
-    Text2.unshift(ShellyOnline);
-  }
-  setState('0_userdata.0.Haustechnik.Netzwerk.ShellysOnline' /* ShellysOnline */, Text2, true);
-  setState('0_userdata.0.Haustechnik.Netzwerk.AnzahlOnline' /* AnzahlOnline */, AnzahlOnline, true);
-});
-
-//JTNDeG1sJTIweG1sbnMlM0QlMjJodHRwcyUzQSUyRiUyRmRldmVsb3BlcnMuZ29vZ2xlLmNvbSUyRmJsb2NrbHklMkZ4bWwlMjIlM0UlM0N2YXJpYWJsZXMlM0UlM0N2YXJpYWJsZSUyMGlkJTNEJTIyS1k0MH5+WUgpJTNBbGFfJTVCcyU1RFklMkJmJTNCJTIyJTNFUGluZyUyMFZlcnN1Y2hlJTNDJTJGdmFyaWFibGUlM0UlM0N2YXJpYWJsZSUyMGlkJTNEJTIyS2glNUVFY3hQNG8lM0YqJTNBJTNEJTdCeGdnRSUzRiU3RCUyMiUzRVZlcnN1Y2hlJTNDJTJGdmFyaWFibGUlM0UlM0N2YXJpYWJsZSUyMGlkJTNEJTIyOCU2MGQlMjRkJTdDLWUlM0IlMkMlNDBTbk11cjglNjBfRiUyMiUzRUFuemFobE9ubGluZSUzQyUyRnZhcmlhYmxlJTNFJTNDdmFyaWFibGUlMjBpZCUzRCUyMnlhOCU3RGglNURLXyUyNXYlN0RocCUyNVlpZSUzRlklM0QlMjIlM0VUZXh0JTNDJTJGdmFyaWFibGUlM0UlM0N2YXJpYWJsZSUyMGlkJTNEJTIyaUN1c2VSOWl1JTVEJTNCRCkubW9QU1pWJTIyJTNFaSUzQyUyRnZhcmlhYmxlJTNFJTNDdmFyaWFibGUlMjBpZCUzRCUyMlp4JTdEV0N0VkQlMjVPNX5jMCU3RGdGMzIlM0QlMjIlM0VTaGVsbHlPbmxpbmUlM0MlMkZ2YXJpYWJsZSUzRSUzQyUyRnZhcmlhYmxlcyUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMm9uJTIyJTIwaWQlM0QlMjIwcEQoRVhQJTVCSEEqcFVaIS5nJTVEJTdDZCUyMiUyMHglM0QlMjI5NjIlMjIlMjB5JTNEJTIyMjcyNCUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMk9JRCUyMiUzRTBfdXNlcmRhdGEuMC5IYXVzdGVjaG5pay5OZXR6d2Vyay5TdHJvbWF1c2ZhbGxfVmVyc3VjaGUlM0MlMkZmaWVsZCUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMkNPTkRJVElPTiUyMiUzRW5lJTNDJTJGZmllbGQlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJBQ0tfQ09ORElUSU9OJTIyJTNFJTNDJTJGZmllbGQlM0UlM0NzdGF0ZW1lbnQlMjBuYW1lJTNEJTIyU1RBVEVNRU5UJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIyY29udHJvbHNfaWYlMjIlMjBpZCUzRCUyMlpfTWZEMyUyRmglM0F4bmxUeCU0ME5VclFpJTIyJTNFJTNDbXV0YXRpb24lMjBlbHNlJTNEJTIyMSUyMiUzRSUzQyUyRm11dGF0aW9uJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIySUYwJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIybG9naWNfY29tcGFyZSUyMiUyMGlkJTNEJTIyMGQqdHUlMkZQZUVKZShPWXIyYyU1QmdOJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyT1AlMjIlM0VFUSUzQyUyRmZpZWxkJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyQSUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMm9uX3NvdXJjZSUyMiUyMGlkJTNEJTIyRzE3MWVVNjRZeSUzRn4qMiU3QmJCJTdCJTIzJTNEJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyQVRUUiUyMiUzRXN0YXRlLnZhbCUzQyUyRmZpZWxkJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMkIlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJtYXRoX251bWJlciUyMiUyMGlkJTNEJTIyJTNCbVIlNDBWWE41JTdDJTNCNmRsMkE2JTYwJTNEUDQlMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJOVU0lMjIlM0U1JTNDJTJGZmllbGQlM0UlM0MlMkZibG9jayUzRSUzQyUyRnZhbHVlJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQ3N0YXRlbWVudCUyMG5hbWUlM0QlMjJETzAlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJkZWJ1ZyUyMiUyMGlkJTNEJTIyd1UlMkZEa2RER1JUJTIzTVVfM3QlM0FKZWUlMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJTZXZlcml0eSUyMiUzRXdhcm4lM0MlMkZmaWVsZCUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMlRFWFQlMjIlM0UlM0NzaGFkb3clMjB0eXBlJTNEJTIydGV4dCUyMiUyMGlkJTNEJTIyYUslN0JXTiU3QkMlN0IlNURVJTNCQmctQzYyVG1IJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVEVYVCUyMiUzRVN0cm9tYXVzZmFsbCUyMHZlcm11dGV0JTNDJTJGZmllbGQlM0UlM0MlMkZzaGFkb3clM0UlM0MlMkZ2YWx1ZSUzRSUzQ25leHQlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJ2YXJpYWJsZXNfc2V0JTIyJTIwaWQlM0QlMjJQcyk3dypCMSU3RFNfJTVEJTNGWSU1QkUlMjQ4eVYlMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJWQVIlMjIlMjBpZCUzRCUyMktoJTVFRWN4UDRvJTNGKiUzQSUzRCU3QnhnZ0UlM0YlN0QlMjIlM0VWZXJzdWNoZSUzQyUyRmZpZWxkJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyVkFMVUUlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJtYXRoX251bWJlciUyMiUyMGlkJTNEJTIydSlLSTVHajklMjR1aypxciglMjU2eFdNJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyTlVNJTIyJTNFMCUzQyUyRmZpZWxkJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQ25leHQlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJjb250cm9sc193aGlsZVVudGlsJTIyJTIwaWQlM0QlMjJmd35IUGRzJTVFJTNEJTNBQkIlM0RGU2FnRWUlM0IlMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJNT0RFJTIyJTNFV0hJTEUlM0MlMkZmaWVsZCUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMkJPT0wlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJsb2dpY19jb21wYXJlJTIyJTIwaWQlM0QlMjJNJTdCY2F+cE1GJTI0ayU3RCUzRjFUZyUzQiUyNXRZfiUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMk9QJTIyJTNFRVElM0MlMkZmaWVsZCUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMkElMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJvbl9zb3VyY2UlMjIlMjBpZCUzRCUyMn5Pa05aVX4yflBYbyU1RCUyQyU1RWslN0NITkwlMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJBVFRSJTIyJTNFc3RhdGUudmFsJTNDJTJGZmllbGQlM0UlM0MlMkZibG9jayUzRSUzQyUyRnZhbHVlJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyQiUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMm1hdGhfbnVtYmVyJTIyJTIwaWQlM0QlMjJIeWlDR1QxJTJDTFglM0F6MSU3QiUyQnRDaDZXJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyTlVNJTIyJTNFNSUzQyUyRmZpZWxkJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0NzdGF0ZW1lbnQlMjBuYW1lJTNEJTIyRE8lMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJjb250cm9sc19pZiUyMiUyMGlkJTNEJTIyS0k3LkhVJTdEZVlaYSU1RSU2MGhXU085JTVFJTI0JTIyJTNFJTNDbXV0YXRpb24lMjBlbHNlJTNEJTIyMSUyMiUzRSUzQyUyRm11dGF0aW9uJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIySUYwJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIybG9naWNfY29tcGFyZSUyMiUyMGlkJTNEJTIydzR+WCU1REU2JTdEMSU1REglN0QhNiUzRkouY0JLJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyT1AlMjIlM0VHVEUlM0MlMkZmaWVsZCUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMkElMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJ2YXJpYWJsZXNfZ2V0JTIyJTIwaWQlM0QlMjIlN0IlMkYwcSUzRDFlNnJkMSU1Qm9tWTJVall3JTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVkFSJTIyJTIwaWQlM0QlMjJLaCU1RUVjeFA0byUzRiolM0ElM0QlN0J4Z2dFJTNGJTdEJTIyJTNFVmVyc3VjaGUlM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJCJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIybWF0aF9udW1iZXIlMjIlMjBpZCUzRCUyMkhwfkRYN0NlJTI0UDIlN0RudVYlMjVtWHpCJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyTlVNJTIyJTNFMTAlM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0MlMkZibG9jayUzRSUzQyUyRnZhbHVlJTNFJTNDc3RhdGVtZW50JTIwbmFtZSUzRCUyMkRPMCUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMmRlYnVnJTIyJTIwaWQlM0QlMjJpVlRDMjdmSDZvX0cqUFRuKHolMjQ4JTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyU2V2ZXJpdHklMjIlM0VlcnJvciUzQyUyRmZpZWxkJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyVEVYVCUyMiUzRSUzQ3NoYWRvdyUyMHR5cGUlM0QlMjJ0ZXh0JTIyJTIwaWQlM0QlMjJCek9tdiUyQllaYVk0XyU1RFprN35KQmslMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJURVhUJTIyJTNFU3Ryb21hdXNmYWxsJTIwZXJrYW5udCElM0MlMkZmaWVsZCUzRSUzQyUyRnNoYWRvdyUzRSUzQyUyRnZhbHVlJTNFJTNDbmV4dCUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMnRpbWVvdXRzX3dhaXQlMjIlMjBpZCUzRCUyMksxZFlkWSUyQypKJTVEJTI1MllsdCU3Q0h4JTNBciUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMkRFTEFZJTIyJTNFMSUzQyUyRmZpZWxkJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVU5JVCUyMiUzRW1pbiUzQyUyRmZpZWxkJTNFJTNDbmV4dCUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMmNvbnRyb2xzX2Zsb3dfc3RhdGVtZW50cyUyMiUyMGlkJTNEJTIybnNNMEVmJTQwSkZUYkYlM0YlNUIybH5GRm8lMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJGTE9XJTIyJTNFQlJFQUslM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGbmV4dCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGbmV4dCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGc3RhdGVtZW50JTNFJTNDc3RhdGVtZW50JTIwbmFtZSUzRCUyMkVMU0UlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJtYXRoX2NoYW5nZSUyMiUyMGlkJTNEJTIyJTJCajUlM0YlM0I1MjVXcUwlM0ElNjBOdHI4JTI1X0glMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJWQVIlMjIlMjBpZCUzRCUyMktoJTVFRWN4UDRvJTNGKiUzQSUzRCU3QnhnZ0UlM0YlN0QlMjIlM0VWZXJzdWNoZSUzQyUyRmZpZWxkJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyREVMVEElMjIlM0UlM0NzaGFkb3clMjB0eXBlJTNEJTIybWF0aF9udW1iZXIlMjIlMjBpZCUzRCUyMiUzRjF2JTVEWXElNjAlM0RRJTIzSiU3QnBrb0lId3YlMkIlMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJOVU0lMjIlM0UxJTNDJTJGZmllbGQlM0UlM0MlMkZzaGFkb3clM0UlM0MlMkZ2YWx1ZSUzRSUzQ25leHQlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJkZWJ1ZyUyMiUyMGlkJTNEJTIyKiUyRlp+QnZVQ1gzJTNGKCUyQzc4bSUyQ1FzJTI1JTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyU2V2ZXJpdHklMjIlM0Vsb2clM0MlMkZmaWVsZCUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMlRFWFQlMjIlM0UlM0NzaGFkb3clMjB0eXBlJTNEJTIydGV4dCUyMiUyMGlkJTNEJTIyQWctcTA2dlRlTldvSkJYQVNCJTNCJTNBJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVEVYVCUyMiUzRXRlc3QlM0MlMkZmaWVsZCUzRSUzQyUyRnNoYWRvdyUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMnRleHRfam9pbiUyMiUyMGlkJTNEJTIyTGUlMjQ4ITUlNUU1cFZhVWZ5cyU2MChjeSUyMyUyMiUzRSUzQ211dGF0aW9uJTIwaXRlbXMlM0QlMjIzJTIyJTNFJTNDJTJGbXV0YXRpb24lM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJBREQwJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIydGV4dCUyMiUyMGlkJTNEJTIyIX4lNUV2ZXl0Q1YlMjQlM0ZBQXlEZ1lnJTJGNiUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMlRFWFQlMjIlM0VWZXJzdWNoJTIwJTNDJTJGZmllbGQlM0UlM0MlMkZibG9jayUzRSUzQyUyRnZhbHVlJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyQUREMSUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMnZhcmlhYmxlc19nZXQlMjIlMjBpZCUzRCUyMlJ2dH5pZSUyNEtfJTIzd3QlMkJ0NXUwNUlnJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVkFSJTIyJTIwaWQlM0QlMjJLaCU1RUVjeFA0byUzRiolM0ElM0QlN0J4Z2dFJTNGJTdEJTIyJTNFVmVyc3VjaGUlM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJBREQyJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIydGV4dCUyMiUyMGlkJTNEJTIyczBkdjclN0QpeiUzRmVkJTNGNSFmejF+cyUyQiUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMlRFWFQlMjIlM0UlMjB2b24lMjAxMCUzQyUyRmZpZWxkJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0NuZXh0JTNFJTNDYmxvY2slMjB0eXBlJTNEJTIydGltZW91dHNfd2FpdCUyMiUyMGlkJTNEJTIyZFRabWopZFo2TFglMjMlMjRHUWRIUGElMjUlMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJERUxBWSUyMiUzRTIlM0MlMkZmaWVsZCUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMlVOSVQlMjIlM0VtaW4lM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGbmV4dCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGbmV4dCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGc3RhdGVtZW50JTNFJTNDJTJGYmxvY2slM0UlM0MlMkZzdGF0ZW1lbnQlM0UlM0MlMkZibG9jayUzRSUzQyUyRm5leHQlM0UlM0MlMkZibG9jayUzRSUzQyUyRm5leHQlM0UlM0MlMkZibG9jayUzRSUzQyUyRnN0YXRlbWVudCUzRSUzQ3N0YXRlbWVudCUyMG5hbWUlM0QlMjJFTFNFJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIyZGVidWclMjIlMjBpZCUzRCUyMi0lNUIlN0QlMjUoN1V1d01BRCU1QjMhTDZOJTYwRSUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMlNldmVyaXR5JTIyJTNFbG9nJTNDJTJGZmllbGQlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJURVhUJTIyJTNFJTNDc2hhZG93JTIwdHlwZSUzRCUyMnRleHQlMjIlMjBpZCUzRCUyMnUlM0FFS0FmSUZ1WVJ3dSglNUUqVlRPOCUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMlRFWFQlMjIlM0UlM0MlMkZmaWVsZCUzRSUzQyUyRnNoYWRvdyUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMnRleHRfam9pbiUyMiUyMGlkJTNEJTIyTkhUJTVCRVQyQ3A0ZSlseEtuJTJGJTQwcyUyRiUyMiUzRSUzQ211dGF0aW9uJTIwaXRlbXMlM0QlMjIyJTIyJTNFJTNDJTJGbXV0YXRpb24lM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJBREQwJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIyb25fc291cmNlJTIyJTIwaWQlM0QlMjJSJTNCNWUlNDAlNUJPQiUyMyUzRCUyM3d3RnVaIURRJTI1JTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyQVRUUiUyMiUzRXN0YXRlLnZhbCUzQyUyRmZpZWxkJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMkFERDElMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJ0ZXh0JTIyJTIwaWQlM0QlMjIoNlN2JTNBV1NPeX5LWS0lNjB2dF9aaUclMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJURVhUJTIyJTNFJTIwTmV0endlcmtnZXIlQzMlQTR0ZSUyMHNpbmQlMjBPZmZsaW5lISUzQyUyRmZpZWxkJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0MlMkZibG9jayUzRSUzQyUyRnN0YXRlbWVudCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGc3RhdGVtZW50JTNFJTNDbmV4dCUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMm9uX2V4dCUyMiUyMGlkJTNEJTIyRSUyMyFyQm1lY2xEJTNGVGglN0NfJTI0ZWVIJTdEJTIyJTNFJTNDbXV0YXRpb24lMjB4bWxucyUzRCUyMmh0dHAlM0ElMkYlMkZ3d3cudzMub3JnJTJGMTk5OSUyRnhodG1sJTIyJTIwaXRlbXMlM0QlMjI1JTIyJTNFJTNDJTJGbXV0YXRpb24lM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJDT05ESVRJT04lMjIlM0VuZSUzQyUyRmZpZWxkJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyQUNLX0NPTkRJVElPTiUyMiUzRSUzQyUyRmZpZWxkJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyT0lEMCUyMiUzRSUzQ3NoYWRvdyUyMHR5cGUlM0QlMjJmaWVsZF9vaWQlMjIlMjBpZCUzRCUyMmNfMyo5OWxMJTI0cGMlMkZwOSUyNXZGbCUyNEclMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJvaWQlMjIlM0VwaW5nLjAuaW9Ccm9rZXItRnV0cm8uMTkyXzE2OF8xXzEuYWxpdmUlM0MlMkZmaWVsZCUzRSUzQyUyRnNoYWRvdyUzRSUzQyUyRnZhbHVlJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyT0lEMSUyMiUzRSUzQ3NoYWRvdyUyMHR5cGUlM0QlMjJmaWVsZF9vaWQlMjIlMjBpZCUzRCUyMjMlN0RZYiU1RUUlMjRhRWtoJTYwJTI0SSU0MCU0ME1XYmslMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJvaWQlMjIlM0VwaW5nLjAuaW9Ccm9rZXItRnV0cm8uMTkyXzE2OF8xXzYuYWxpdmUlM0MlMkZmaWVsZCUzRSUzQyUyRnNoYWRvdyUzRSUzQyUyRnZhbHVlJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyT0lEMiUyMiUzRSUzQ3NoYWRvdyUyMHR5cGUlM0QlMjJmaWVsZF9vaWQlMjIlMjBpZCUzRCUyMlhlcEpFRTRWayU0ME5pMCU3QyFmdSliYiUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMm9pZCUyMiUzRXBpbmcuMC5pb0Jyb2tlci1GdXRyby4xOTJfMTY4XzFfNy5hbGl2ZSUzQyUyRmZpZWxkJTNFJTNDJTJGc2hhZG93JTNFJTNDJTJGdmFsdWUlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJPSUQzJTIyJTNFJTNDc2hhZG93JTIwdHlwZSUzRCUyMmZpZWxkX29pZCUyMiUyMGlkJTNEJTIyJTNGMk4haE5RSGgqeDBJOXZpSiE5YiUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMm9pZCUyMiUzRXBpbmcuMC5pb0Jyb2tlci1GdXRyby4xOTJfMTY4XzFfOC5hbGl2ZSUzQyUyRmZpZWxkJTNFJTNDJTJGc2hhZG93JTNFJTNDJTJGdmFsdWUlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJPSUQ0JTIyJTNFJTNDc2hhZG93JTIwdHlwZSUzRCUyMmZpZWxkX29pZCUyMiUyMGlkJTNEJTIyalElNDAxVTVhdGJ3Qn5FdDlWb0hsMiUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMm9pZCUyMiUzRXBpbmcuMC5pb0Jyb2tlci1GdXRyby4xOTJfMTY4XzFfOS5hbGl2ZSUzQyUyRmZpZWxkJTNFJTNDJTJGc2hhZG93JTNFJTNDJTJGdmFsdWUlM0UlM0NzdGF0ZW1lbnQlMjBuYW1lJTNEJTIyU1RBVEVNRU5UJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIydmFyaWFibGVzX3NldCUyMiUyMGlkJTNEJTIyTSU2MEwlN0NKd3Q0MlRmb0clMjNvJTNCJTYwJTNGKXclMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJWQVIlMjIlMjBpZCUzRCUyMktZNDB+fllIKSUzQWxhXyU1QnMlNURZJTJCZiUzQiUyMiUzRVBpbmclMjBWZXJzdWNoZSUzQyUyRmZpZWxkJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyVkFMVUUlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJtYXRoX251bWJlciUyMiUyMGlkJTNEJTIyOHghQUpHSk0lN0NaZExGWEpaSVZCJTI0JTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyTlVNJTIyJTNFMCUzQyUyRmZpZWxkJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQ25leHQlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJjb250cm9sc19pZiUyMiUyMGlkJTNEJTIyNUFNMXZTTi1hME5rJTI0UlVHZDJ0QyUyMiUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMklGMCUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMmxvZ2ljX25lZ2F0ZSUyMiUyMGlkJTNEJTIya2RfN04ucUolM0RzJTIzLkl4MjBkJTJDdHMlMjIlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJCT09MJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIyZ2V0X3ZhbHVlJTIyJTIwaWQlM0QlMjJyVWtDUSUyNSU0MCUyQ1NDM1VuQiUzRkhSNmpaJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyQVRUUiUyMiUzRXZhbCUzQyUyRmZpZWxkJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyT0lEJTIyJTNFcGluZy4wLmlvQnJva2VyLUZ1dHJvLjE5Ml8xNjhfMV8xLmFsaXZlJTNDJTJGZmllbGQlM0UlM0MlMkZibG9jayUzRSUzQyUyRnZhbHVlJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQ3N0YXRlbWVudCUyMG5hbWUlM0QlMjJETzAlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJtYXRoX2NoYW5nZSUyMiUyMGlkJTNEJTIybkNXdDMxR1dUbyUzRGRYa2QoJTJGa2MqJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVkFSJTIyJTIwaWQlM0QlMjJLWTQwfn5ZSCklM0FsYV8lNUJzJTVEWSUyQmYlM0IlMjIlM0VQaW5nJTIwVmVyc3VjaGUlM0MlMkZmaWVsZCUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMkRFTFRBJTIyJTNFJTNDc2hhZG93JTIwdHlwZSUzRCUyMm1hdGhfbnVtYmVyJTIyJTIwaWQlM0QlMjJkUDZSXzYlN0NaNzAlNDBsJTQwWXBUJTIzbnI0JTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyTlVNJTIyJTNFMSUzQyUyRmZpZWxkJTNFJTNDJTJGc2hhZG93JTNFJTNDJTJGdmFsdWUlM0UlM0MlMkZibG9jayUzRSUzQyUyRnN0YXRlbWVudCUzRSUzQ25leHQlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJjb250cm9sc19pZiUyMiUyMGlkJTNEJTIyUkxwSiphJTYwWWcqLUJmSCglMjN0bSUzQnUlMjIlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJJRjAlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJsb2dpY19uZWdhdGUlMjIlMjBpZCUzRCUyMnUzLXRRdyUzQXRGSFIlMjVwRGclMjQlMkMtcTQlMjIlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJCT09MJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIyZ2V0X3ZhbHVlJTIyJTIwaWQlM0QlMjJSWSU3RHNXJTIzUDdHaWklMkJZV28xN2U4KSUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMkFUVFIlMjIlM0V2YWwlM0MlMkZmaWVsZCUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMk9JRCUyMiUzRXBpbmcuMC5pb0Jyb2tlci1GdXRyby4xOTJfMTY4XzFfNi5hbGl2ZSUzQyUyRmZpZWxkJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0NzdGF0ZW1lbnQlMjBuYW1lJTNEJTIyRE8wJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIybWF0aF9jaGFuZ2UlMjIlMjBpZCUzRCUyMiE4NCUyQjV5JTVFUkwlNUQ4SFglN0QlMjNrWVglMjVuJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVkFSJTIyJTIwaWQlM0QlMjJLWTQwfn5ZSCklM0FsYV8lNUJzJTVEWSUyQmYlM0IlMjIlM0VQaW5nJTIwVmVyc3VjaGUlM0MlMkZmaWVsZCUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMkRFTFRBJTIyJTNFJTNDc2hhZG93JTIwdHlwZSUzRCUyMm1hdGhfbnVtYmVyJTIyJTIwaWQlM0QlMjI1ZTI3OShOQVlwJTNEfkpWeTBRJTJCMyU3RCUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMk5VTSUyMiUzRTElM0MlMkZmaWVsZCUzRSUzQyUyRnNoYWRvdyUzRSUzQyUyRnZhbHVlJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZzdGF0ZW1lbnQlM0UlM0NuZXh0JTNFJTNDYmxvY2slMjB0eXBlJTNEJTIyY29udHJvbHNfaWYlMjIlMjBpZCUzRCUyMlJQWVIlN0QqUGkza08lNUR0RjQlMjUlMjVkJTNETCUyMiUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMklGMCUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMmxvZ2ljX25lZ2F0ZSUyMiUyMGlkJTNEJTIyciUyQlN2b0olN0MlMjQpJTNCNSUyQyUyMzUwJTJCeUttTSUyMiUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMkJPT0wlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJnZXRfdmFsdWUlMjIlMjBpZCUzRCUyMnIlNUJCdlVtOUhmTCU1RTFPYi4lN0IoKSUyQlAlMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJBVFRSJTIyJTNFdmFsJTNDJTJGZmllbGQlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJPSUQlMjIlM0VwaW5nLjAuaW9Ccm9rZXItRnV0cm8uMTkyXzE2OF8xXzcuYWxpdmUlM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0MlMkZibG9jayUzRSUzQyUyRnZhbHVlJTNFJTNDc3RhdGVtZW50JTIwbmFtZSUzRCUyMkRPMCUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMm1hdGhfY2hhbmdlJTIyJTIwaWQlM0QlMjIqQ3l1KF9PRiU0MERDNkslNUV0JTJDJTJDYTFWJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVkFSJTIyJTIwaWQlM0QlMjJLWTQwfn5ZSCklM0FsYV8lNUJzJTVEWSUyQmYlM0IlMjIlM0VQaW5nJTIwVmVyc3VjaGUlM0MlMkZmaWVsZCUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMkRFTFRBJTIyJTNFJTNDc2hhZG93JTIwdHlwZSUzRCUyMm1hdGhfbnVtYmVyJTIyJTIwaWQlM0QlMjJveCFJMiU3RF8lN0QlMjMlM0ZIfnBNcFZ+JTdCS20lMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJOVU0lMjIlM0UxJTNDJTJGZmllbGQlM0UlM0MlMkZzaGFkb3clM0UlM0MlMkZ2YWx1ZSUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGc3RhdGVtZW50JTNFJTNDbmV4dCUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMmNvbnRyb2xzX2lmJTIyJTIwaWQlM0QlMjIlM0RkMCUzRG1lV085S2RWJTVEaSpvTWElN0NsJTIyJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIySUYwJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIybG9naWNfbmVnYXRlJTIyJTIwaWQlM0QlMjIlN0NXJTNBUGcpflR1SUI5Z0FCY1k4ZH4lMjIlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJCT09MJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIyZ2V0X3ZhbHVlJTIyJTIwaWQlM0QlMjI0JTJDY18uZHZFaWVEWS1HWmsteiUzQXIlMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJBVFRSJTIyJTNFdmFsJTNDJTJGZmllbGQlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJPSUQlMjIlM0VwaW5nLjAuaW9Ccm9rZXItRnV0cm8uMTkyXzE2OF8xXzguYWxpdmUlM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0MlMkZibG9jayUzRSUzQyUyRnZhbHVlJTNFJTNDc3RhdGVtZW50JTIwbmFtZSUzRCUyMkRPMCUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMm1hdGhfY2hhbmdlJTIyJTIwaWQlM0QlMjIlMjRRMGNtSiU1RCUyRlRQJTdDLUklM0ElMkIlNUVDc2JSJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVkFSJTIyJTIwaWQlM0QlMjJLWTQwfn5ZSCklM0FsYV8lNUJzJTVEWSUyQmYlM0IlMjIlM0VQaW5nJTIwVmVyc3VjaGUlM0MlMkZmaWVsZCUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMkRFTFRBJTIyJTNFJTNDc2hhZG93JTIwdHlwZSUzRCUyMm1hdGhfbnVtYmVyJTIyJTIwaWQlM0QlMjJrMXYqUHhDJTdEeFhRZmRaNCUzQXAlNUIwYSUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMk5VTSUyMiUzRTElM0MlMkZmaWVsZCUzRSUzQyUyRnNoYWRvdyUzRSUzQyUyRnZhbHVlJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZzdGF0ZW1lbnQlM0UlM0NuZXh0JTNFJTNDYmxvY2slMjB0eXBlJTNEJTIyY29udHJvbHNfaWYlMjIlMjBpZCUzRCUyMiU1RCUzQXklNURSdiUyRi0uenRrUTcxVSU1QmlSZiUyMiUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMklGMCUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMmxvZ2ljX25lZ2F0ZSUyMiUyMGlkJTNEJTIyJTVCJTI0VjNCJTNBJTQwbVNoSiUzRC0lN0MlMkZUJTYwYzNhJTIyJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyQk9PTCUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMmdldF92YWx1ZSUyMiUyMGlkJTNEJTIyQ2J6KHQuJTIzM1I1dUslN0N1WiUyMyUyQ2h0ciUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMkFUVFIlMjIlM0V2YWwlM0MlMkZmaWVsZCUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMk9JRCUyMiUzRXBpbmcuMC5pb0Jyb2tlci1GdXRyby4xOTJfMTY4XzFfOS5hbGl2ZSUzQyUyRmZpZWxkJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0NzdGF0ZW1lbnQlMjBuYW1lJTNEJTIyRE8wJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIybWF0aF9jaGFuZ2UlMjIlMjBpZCUzRCUyMmslNUVpJTI1S294JTI1aTNKbE5xSSUyQzIlMjVSJTdCJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVkFSJTIyJTIwaWQlM0QlMjJLWTQwfn5ZSCklM0FsYV8lNUJzJTVEWSUyQmYlM0IlMjIlM0VQaW5nJTIwVmVyc3VjaGUlM0MlMkZmaWVsZCUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMkRFTFRBJTIyJTNFJTNDc2hhZG93JTIwdHlwZSUzRCUyMm1hdGhfbnVtYmVyJTIyJTIwaWQlM0QlMjI0JTJCNWZZcjRRRnNmeihrQ2VtKnElMkIlMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJOVU0lMjIlM0UxJTNDJTJGZmllbGQlM0UlM0MlMkZzaGFkb3clM0UlM0MlMkZ2YWx1ZSUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGc3RhdGVtZW50JTNFJTNDbmV4dCUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMnVwZGF0ZSUyMiUyMGlkJTNEJTIyNiUyRnhhMyUzQU4lNUQlMkZtJTJCU0oxJTIzSG1UWmYlMjIlM0UlM0NtdXRhdGlvbiUyMHhtbG5zJTNEJTIyaHR0cCUzQSUyRiUyRnd3dy53My5vcmclMkYxOTk5JTJGeGh0bWwlMjIlMjBkZWxheV9pbnB1dCUzRCUyMmZhbHNlJTIyJTNFJTNDJTJGbXV0YXRpb24lM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJPSUQlMjIlM0UwX3VzZXJkYXRhLjAuSGF1c3RlY2huaWsuTmV0endlcmsuU3Ryb21hdXNmYWxsX1ZlcnN1Y2hlJTNDJTJGZmllbGQlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJXSVRIX0RFTEFZJTIyJTNFRkFMU0UlM0MlMkZmaWVsZCUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMlZBTFVFJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIydmFyaWFibGVzX2dldCUyMiUyMGlkJTNEJTIydEEpWXklM0QlM0RVQWlQLU9fJTI0JTJDen5pbSUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMlZBUiUyMiUyMGlkJTNEJTIyS1k0MH5+WUgpJTNBbGFfJTVCcyU1RFklMkJmJTNCJTIyJTNFUGluZyUyMFZlcnN1Y2hlJTNDJTJGZmllbGQlM0UlM0MlMkZibG9jayUzRSUzQyUyRnZhbHVlJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZuZXh0JTNFJTNDJTJGYmxvY2slM0UlM0MlMkZuZXh0JTNFJTNDJTJGYmxvY2slM0UlM0MlMkZuZXh0JTNFJTNDJTJGYmxvY2slM0UlM0MlMkZuZXh0JTNFJTNDJTJGYmxvY2slM0UlM0MlMkZuZXh0JTNFJTNDJTJGYmxvY2slM0UlM0MlMkZuZXh0JTNFJTNDJTJGYmxvY2slM0UlM0MlMkZzdGF0ZW1lbnQlM0UlM0NuZXh0JTNFJTNDYmxvY2slMjB0eXBlJTNEJTIyb25fZXh0JTIyJTIwaWQlM0QlMjIuVG1mNy4ubSU2MEklNjBla1ZwVWhvbGElMjIlM0UlM0NtdXRhdGlvbiUyMHhtbG5zJTNEJTIyaHR0cCUzQSUyRiUyRnd3dy53My5vcmclMkYxOTk5JTJGeGh0bWwlMjIlMjBpdGVtcyUzRCUyMjElMjIlM0UlM0MlMkZtdXRhdGlvbiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMkNPTkRJVElPTiUyMiUzRW5lJTNDJTJGZmllbGQlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJBQ0tfQ09ORElUSU9OJTIyJTNFJTNDJTJGZmllbGQlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJPSUQwJTIyJTNFJTNDc2hhZG93JTIwdHlwZSUzRCUyMmZpZWxkX29pZCUyMiUyMGlkJTNEJTIyei1nJTVEc3IwekQ0ZmQlN0RWTUsxZiUyQ2glMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJvaWQlMjIlM0VobWlwLjAuZGV2aWNlcy4zMDE0RjcxMUEwMDAwMEREODlCMjZFRDIuY2hhbm5lbHMuMC5sb3dCYXQlM0MlMkZmaWVsZCUzRSUzQyUyRnNoYWRvdyUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMnNlbGVjdG9yJTIyJTIwaWQlM0QlMjJaZEUlM0IlNUVJTnR5JTJCRWQ0USUzQiU2MCUyQmIlM0JQJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVEVYVCUyMiUzRXN0YXRlJTVCaWQlM0QqJTVEKGZ1bmN0aW9ucyUzRHNoZWxseW9ubGluZSklM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0NzdGF0ZW1lbnQlMjBuYW1lJTNEJTIyU1RBVEVNRU5UJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIydmFyaWFibGVzX3NldCUyMiUyMGlkJTNEJTIyM3RBJTdCbyUyM01fdEJvJTVCMSUzRjVqfkclMjN4JTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVkFSJTIyJTIwaWQlM0QlMjI4JTYwZCUyNGQlN0MtZSUzQiUyQyU0MFNuTXVyOCU2MF9GJTIyJTNFQW56YWhsT25saW5lJTNDJTJGZmllbGQlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJWQUxVRSUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMm1hdGhfbnVtYmVyJTIyJTIwaWQlM0QlMjJwVn4tJTdDJTYwJTNBUVRXanZhJTJDJTVFVmtHNiUyNCUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMk5VTSUyMiUzRTAlM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0NuZXh0JTNFJTNDYmxvY2slMjB0eXBlJTNEJTIydmFyaWFibGVzX3NldCUyMiUyMGlkJTNEJTIyJTVFTFM2JTVEVmYlMjNfJTJGVypiJTNGRGoqMFFUJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVkFSJTIyJTIwaWQlM0QlMjJ5YTglN0RoJTVES18lMjV2JTdEaHAlMjVZaWUlM0ZZJTNEJTIyJTNFVGV4dCUzQyUyRmZpZWxkJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyVkFMVUUlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJsaXN0c19jcmVhdGVfd2l0aCUyMiUyMGlkJTNEJTIyJTVFfkpNeVdUZElkcnoqdzZNbi5ZeCUyMiUzRSUzQ211dGF0aW9uJTIwaXRlbXMlM0QlMjIwJTIyJTNFJTNDJTJGbXV0YXRpb24lM0UlM0MlMkZibG9jayUzRSUzQyUyRnZhbHVlJTNFJTNDbmV4dCUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMmNvbnRyb2xzX2ZvckVhY2glMjIlMjBpZCUzRCUyMkYlN0RkaW5tUW11OSopM3B2XyUyQnMlNUVXJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVkFSJTIyJTIwaWQlM0QlMjJpQ3VzZVI5aXUlNUQlM0JEKS5tb1BTWlYlMjIlM0VpJTNDJTJGZmllbGQlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJMSVNUJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIyc2VsZWN0b3IlMjIlMjBpZCUzRCUyMjlzdkE5MCUyRlIlMjR4JTI0JTJGdCU3Qm5pJTIzJTJCRSU3RCUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMlRFWFQlMjIlM0VzdGF0ZSU1QmlkJTNEKiU1RChmdW5jdGlvbnMlM0RzaGVsbHlvbmxpbmUpJTNDJTJGZmllbGQlM0UlM0MlMkZibG9jayUzRSUzQyUyRnZhbHVlJTNFJTNDc3RhdGVtZW50JTIwbmFtZSUzRCUyMkRPJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIydmFyaWFibGVzX3NldCUyMiUyMGlkJTNEJTIySldhKEhlKHdDR2hhakptd2pnS3QlMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJWQVIlMjIlMjBpZCUzRCUyMlp4JTdEV0N0VkQlMjVPNX5jMCU3RGdGMzIlM0QlMjIlM0VTaGVsbHlPbmxpbmUlM0MlMkZmaWVsZCUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMlZBTFVFJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIydGV4dF9qb2luJTIyJTIwaWQlM0QlMjI4JTNEJTYwJTI1YVZiIThyajIpUTUlM0YpdGtJJTIyJTNFJTNDbXV0YXRpb24lMjBpdGVtcyUzRCUyMjMlMjIlM0UlM0MlMkZtdXRhdGlvbiUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMkFERDAlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJ2YXJpYWJsZXNfZ2V0JTIyJTIwaWQlM0QlMjIqKSUyQ0slMjQlMjNsUjJfWlA2ZiU1RCUzRm8lNDBMJTI1JTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVkFSJTIyJTIwaWQlM0QlMjJpQ3VzZVI5aXUlNUQlM0JEKS5tb1BTWlYlMjIlM0VpJTNDJTJGZmllbGQlM0UlM0MlMkZibG9jayUzRSUzQyUyRnZhbHVlJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyQUREMSUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMnRleHQlMjIlMjBpZCUzRCUyMjUlMkMlNUJrY0ZTJTNBJTNEcTN0JTdDJTI0Yk15RXNvJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVEVYVCUyMiUzRSUzRCUzQyUyRmZpZWxkJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMkFERDIlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJnZXRfdmFsdWVfdmFyJTIyJTIwaWQlM0QlMjI4c2JtcW10SGdHbXJRMDZYWCU2MGs0JTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyQVRUUiUyMiUzRXZhbCUzQyUyRmZpZWxkJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyT0lEJTIyJTNFJTNDc2hhZG93JTIwdHlwZSUzRCUyMnRleHQlMjIlMjBpZCUzRCUyMlUhbiU1QiU0MHgoJTVFak5FRyUzRldjbVZKJTdCJTI0JTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVEVYVCUyMiUzRSUzQyUyRmZpZWxkJTNFJTNDJTJGc2hhZG93JTNFJTNDYmxvY2slMjB0eXBlJTNEJTIydmFyaWFibGVzX2dldCUyMiUyMGlkJTNEJTIyU0pLJTI1NnQ0a3MlN0IxJTVCRHolM0FiJTNCbSU1QlMlMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJWQVIlMjIlMjBpZCUzRCUyMmlDdXNlUjlpdSU1RCUzQkQpLm1vUFNaViUyMiUzRWklM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0MlMkZibG9jayUzRSUzQyUyRnZhbHVlJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQ25leHQlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJjb250cm9sc19pZiUyMiUyMGlkJTNEJTIySSk4dyUyNTZVYiFVUiU3Qn5sMzc1cSUyQiglMjIlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJJRjAlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJnZXRfdmFsdWVfdmFyJTIyJTIwaWQlM0QlMjJVfiUyQkwlNjB0byU1RCU3Q0JfJTI0Q1hOOVE1UiUyRiUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMkFUVFIlMjIlM0V2YWwlM0MlMkZmaWVsZCUzRSUzQ3ZhbHVlJTIwbmFtZSUzRCUyMk9JRCUyMiUzRSUzQ3NoYWRvdyUyMHR5cGUlM0QlMjJ0ZXh0JTIyJTIwaWQlM0QlMjIwdl8lN0QlM0ElMkJ+RFVEKHBKaFglNUR0Z0pUJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVEVYVCUyMiUzRSUzQyUyRmZpZWxkJTNFJTNDJTJGc2hhZG93JTNFJTNDYmxvY2slMjB0eXBlJTNEJTIydmFyaWFibGVzX2dldCUyMiUyMGlkJTNEJTIyKVclN0MlMkI3TmhZKXU1Vm8lN0JkMHREaSU3QiUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMlZBUiUyMiUyMGlkJTNEJTIyaUN1c2VSOWl1JTVEJTNCRCkubW9QU1pWJTIyJTNFaSUzQyUyRmZpZWxkJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZ2YWx1ZSUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0NzdGF0ZW1lbnQlMjBuYW1lJTNEJTIyRE8wJTIyJTNFJTNDYmxvY2slMjB0eXBlJTNEJTIybWF0aF9jaGFuZ2UlMjIlMjBpZCUzRCUyMkpEVnZGJTNGQndjJTJDRmklMkJxKXBiWEhaJTIyJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyVkFSJTIyJTIwaWQlM0QlMjI4JTYwZCUyNGQlN0MtZSUzQiUyQyU0MFNuTXVyOCU2MF9GJTIyJTNFQW56YWhsT25saW5lJTNDJTJGZmllbGQlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJERUxUQSUyMiUzRSUzQ3NoYWRvdyUyMHR5cGUlM0QlMjJtYXRoX251bWJlciUyMiUyMGlkJTNEJTIyeSU1RHJGMSE0Uzg1anpVKn4ucykqciUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMk5VTSUyMiUzRTElM0MlMkZmaWVsZCUzRSUzQyUyRnNoYWRvdyUzRSUzQyUyRnZhbHVlJTNFJTNDJTJGYmxvY2slM0UlM0MlMkZzdGF0ZW1lbnQlM0UlM0NuZXh0JTNFJTNDYmxvY2slMjB0eXBlJTNEJTIybGlzdHNfc2V0SW5kZXglMjIlMjBpZCUzRCUyMiolNDA3aUglNDAwRSU3RE5fWU9KJTVCakIlNUQ5cyUyMiUzRSUzQ211dGF0aW9uJTIwYXQlM0QlMjJmYWxzZSUyMiUzRSUzQyUyRm11dGF0aW9uJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyTU9ERSUyMiUzRUlOU0VSVCUzQyUyRmZpZWxkJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyV0hFUkUlMjIlM0VGSVJTVCUzQyUyRmZpZWxkJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyTElTVCUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMnZhcmlhYmxlc19nZXQlMjIlMjBpZCUzRCUyMkJEZmRNSiU3RDVBZyU1RVEpREhjbiohcCUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMlZBUiUyMiUyMGlkJTNEJTIyeWE4JTdEaCU1REtfJTI1diU3RGhwJTI1WWllJTNGWSUzRCUyMiUzRVRleHQlM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0N2YWx1ZSUyMG5hbWUlM0QlMjJUTyUyMiUzRSUzQ2Jsb2NrJTIwdHlwZSUzRCUyMnZhcmlhYmxlc19nZXQlMjIlMjBpZCUzRCUyMmF6WHNZKjYlNDAhJTNCdigyJTIzOWZ+MCUyNFglMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJWQVIlMjIlMjBpZCUzRCUyMlp4JTdEV0N0VkQlMjVPNX5jMCU3RGdGMzIlM0QlMjIlM0VTaGVsbHlPbmxpbmUlM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0MlMkZibG9jayUzRSUzQyUyRm5leHQlM0UlM0MlMkZibG9jayUzRSUzQyUyRm5leHQlM0UlM0MlMkZibG9jayUzRSUzQyUyRnN0YXRlbWVudCUzRSUzQ25leHQlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJ1cGRhdGUlMjIlMjBpZCUzRCUyMkslN0QlN0JBc2shOChnWXUyMCU2MGJKSSpUJTIyJTNFJTNDbXV0YXRpb24lMjB4bWxucyUzRCUyMmh0dHAlM0ElMkYlMkZ3d3cudzMub3JnJTJGMTk5OSUyRnhodG1sJTIyJTIwZGVsYXlfaW5wdXQlM0QlMjJmYWxzZSUyMiUzRSUzQyUyRm11dGF0aW9uJTNFJTNDZmllbGQlMjBuYW1lJTNEJTIyT0lEJTIyJTNFMF91c2VyZGF0YS4wLkhhdXN0ZWNobmlrLk5ldHp3ZXJrLlNoZWxseXNPbmxpbmUlM0MlMkZmaWVsZCUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMldJVEhfREVMQVklMjIlM0VGQUxTRSUzQyUyRmZpZWxkJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyVkFMVUUlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJ2YXJpYWJsZXNfZ2V0JTIyJTIwaWQlM0QlMjIlM0QlM0JxJTJCYUM4M21QaXFjMyU1RSU1RUpQUiU1RSUyMiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMlZBUiUyMiUyMGlkJTNEJTIyeWE4JTdEaCU1REtfJTI1diU3RGhwJTI1WWllJTNGWSUzRCUyMiUzRVRleHQlM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0NuZXh0JTNFJTNDYmxvY2slMjB0eXBlJTNEJTIydXBkYXRlJTIyJTIwaWQlM0QlMjJJVTVhfk9RZzVWKGxqY0lwTVY1NSUyMiUzRSUzQ211dGF0aW9uJTIweG1sbnMlM0QlMjJodHRwJTNBJTJGJTJGd3d3LnczLm9yZyUyRjE5OTklMkZ4aHRtbCUyMiUyMGRlbGF5X2lucHV0JTNEJTIyZmFsc2UlMjIlM0UlM0MlMkZtdXRhdGlvbiUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMk9JRCUyMiUzRTBfdXNlcmRhdGEuMC5IYXVzdGVjaG5pay5OZXR6d2Vyay5BbnphaGxPbmxpbmUlM0MlMkZmaWVsZCUzRSUzQ2ZpZWxkJTIwbmFtZSUzRCUyMldJVEhfREVMQVklMjIlM0VGQUxTRSUzQyUyRmZpZWxkJTNFJTNDdmFsdWUlMjBuYW1lJTNEJTIyVkFMVUUlMjIlM0UlM0NibG9jayUyMHR5cGUlM0QlMjJ2YXJpYWJsZXNfZ2V0JTIyJTIwaWQlM0QlMjIlMjQ4aU1zNyU3RGNCQSkxcG1wOEVTQ3klMjIlM0UlM0NmaWVsZCUyMG5hbWUlM0QlMjJWQVIlMjIlMjBpZCUzRCUyMjglNjBkJTI0ZCU3Qy1lJTNCJTJDJTQwU25NdXI4JTYwX0YlMjIlM0VBbnphaGxPbmxpbmUlM0MlMkZmaWVsZCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGdmFsdWUlM0UlM0MlMkZibG9jayUzRSUzQyUyRm5leHQlM0UlM0MlMkZibG9jayUzRSUzQyUyRm5leHQlM0UlM0MlMkZibG9jayUzRSUzQyUyRm5leHQlM0UlM0MlMkZibG9jayUzRSUzQyUyRm5leHQlM0UlM0MlMkZibG9jayUzRSUzQyUyRnN0YXRlbWVudCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGbmV4dCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGbmV4dCUzRSUzQyUyRmJsb2NrJTNFJTNDJTJGeG1sJTNF
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="KY40~~YH):la_[s]Y+f;">Ping Versuche</variable>
+    <variable id="Kh^EcxP4o?*:={xggE?}">Versuche</variable>
+    <variable id="8`d$d|-e;,@SnMur8`_F">AnzahlOnline</variable>
+    <variable id="ya8}h]K_%v}hp%Yie?Y=">Text</variable>
+    <variable id="iCuseR9iu];D).moPSZV">i</variable>
+    <variable id="Zx}WCtVD%O5~c0}gF32=">ShellyOnline</variable>
+  </variables>
+  <block type="on" id="0pD(EXP[HA*pUZ!.g]|d" x="962" y="2724">
+    <field name="OID">0_userdata.0.Haustechnik.Netzwerk.Stromausfall_Versuche</field>
+    <field name="CONDITION">ne</field>
+    <field name="ACK_CONDITION"></field>
+    <statement name="STATEMENT">
+      <block type="controls_if" id="Z_MfD3/h:xnlTx@NUrQi">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="0d*tu/PeEJe(OYr2c[gN">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="on_source" id="G171eU64Yy?~*2{bB{#=">
+                <field name="ATTR">state.val</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id=";mR@VXN5|;6dl2A6`=P4">
+                <field name="NUM">5</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="debug" id="wU/DkdDGRT#MU_3t:Jee">
+            <field name="Severity">warn</field>
+            <value name="TEXT">
+              <shadow type="text" id="aK{WN{C{]U;Bg-C62TmH">
+                <field name="TEXT">Stromausfall vermutet</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="variables_set" id="Ps)7w*B1}S_]?Y[E$8yV">
+                <field name="VAR" id="Kh^EcxP4o?*:={xggE?}">Versuche</field>
+                <value name="VALUE">
+                  <block type="math_number" id="u)KI5Gj9$uk*qr(%6xWM">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_whileUntil" id="fw~HPds^=:BB=FSagEe;">
+                    <field name="MODE">WHILE</field>
+                    <value name="BOOL">
+                      <block type="logic_compare" id="M{ca~pMF$k}?1Tg;%tY~">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="on_source" id="~OkNZU~2~PXo],^k|HNL">
+                            <field name="ATTR">state.val</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="HyiCGT1,LX:z1{+tCh6W">
+                            <field name="NUM">5</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <block type="controls_if" id="KI7.HU}eYZa^`hWSO9^$">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_compare" id="w4~X]E6}1]H}!6?J.cBK">
+                            <field name="OP">GTE</field>
+                            <value name="A">
+                              <block type="variables_get" id="{/0q=1e6rd1[omY2UjYw">
+                                <field name="VAR" id="Kh^EcxP4o?*:={xggE?}">Versuche</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="Hp~DX7Ce$P2}nuV%mXzB">
+                                <field name="NUM">10</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="debug" id="iVTC27fH6o_G*PTn(z$8">
+                            <field name="Severity">error</field>
+                            <value name="TEXT">
+                              <shadow type="text" id="BzOmv+YZaY4_]Zk7~JBk">
+                                <field name="TEXT">Stromausfall erkannt!</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="timeouts_wait" id="K1dYdY,*J]%2Ylt|Hx:r">
+                                <field name="DELAY">1</field>
+                                <field name="UNIT">min</field>
+                                <next>
+                                  <block type="controls_flow_statements" id="nsM0Ef@JFTbF?[2l~FFo">
+                                    <field name="FLOW">BREAK</field>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="math_change" id="+j5?;525WqL:`Ntr8%_H">
+                            <field name="VAR" id="Kh^EcxP4o?*:={xggE?}">Versuche</field>
+                            <value name="DELTA">
+                              <shadow type="math_number" id="?1v]Yq`=Q#J{pkoIHwv+">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="debug" id="*/Z~BvUCX3?(,78m,Qs%">
+                                <field name="Severity">log</field>
+                                <value name="TEXT">
+                                  <shadow type="text" id="Ag-q06vTeNWoJBXASB;:">
+                                    <field name="TEXT">test</field>
+                                  </shadow>
+                                  <block type="text_join" id="Le$8!5^5pVaUfys`(cy#">
+                                    <mutation items="3"></mutation>
+                                    <value name="ADD0">
+                                      <block type="text" id="!~^veytCV$?AAyDgYg/6">
+                                        <field name="TEXT">Versuch </field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="variables_get" id="Rvt~ie$K_#wt+t5u05Ig">
+                                        <field name="VAR" id="Kh^EcxP4o?*:={xggE?}">Versuche</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD2">
+                                      <block type="text" id="s0dv7})z?ed?5!fz1~s+">
+                                        <field name="TEXT"> von 10</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="timeouts_wait" id="dTZmj)dZ6LX#$GQdHPa%">
+                                    <field name="DELAY">2</field>
+                                    <field name="UNIT">min</field>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="debug" id="-[}%(7UuwMAD[3!L6N`E">
+            <field name="Severity">log</field>
+            <value name="TEXT">
+              <shadow type="text" id="u:EKAfIFuYRwu(^*VTO8">
+                <field name="TEXT"></field>
+              </shadow>
+              <block type="text_join" id="NHT[ET2Cp4e)lxKn/@s/">
+                <mutation items="2"></mutation>
+                <value name="ADD0">
+                  <block type="on_source" id="R;5e@[OB#=#wwFuZ!DQ%">
+                    <field name="ATTR">state.val</field>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="text" id="(6Sv:WSOy~KY-`vt_ZiG">
+                    <field name="TEXT"> Netzwerkgeräte sind Offline!</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <next>
+      <block type="on_ext" id="E#!rBmeclD?Th|_$eeH}">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" items="5"></mutation>
+        <field name="CONDITION">ne</field>
+        <field name="ACK_CONDITION"></field>
+        <value name="OID0">
+          <shadow type="field_oid" id="c_3*99lL$pc/p9%vFl$G">
+            <field name="oid">ping.0.ioBroker-Futro.192_168_1_1.alive</field>
+          </shadow>
+        </value>
+        <value name="OID1">
+          <shadow type="field_oid" id="3}Yb^E$aEkh`$I@@MWbk">
+            <field name="oid">ping.0.ioBroker-Futro.192_168_1_6.alive</field>
+          </shadow>
+        </value>
+        <value name="OID2">
+          <shadow type="field_oid" id="XepJEE4Vk@Ni0|!fu)bb">
+            <field name="oid">ping.0.ioBroker-Futro.192_168_1_7.alive</field>
+          </shadow>
+        </value>
+        <value name="OID3">
+          <shadow type="field_oid" id="?2N!hNQHh*x0I9viJ!9b">
+            <field name="oid">ping.0.ioBroker-Futro.192_168_1_8.alive</field>
+          </shadow>
+        </value>
+        <value name="OID4">
+          <shadow type="field_oid" id="jQ@1U5atbwB~Et9VoHl2">
+            <field name="oid">ping.0.ioBroker-Futro.192_168_1_9.alive</field>
+          </shadow>
+        </value>
+        <statement name="STATEMENT">
+          <block type="variables_set" id="M`L|Jwt42TfoG#o;`?)w">
+            <field name="VAR" id="KY40~~YH):la_[s]Y+f;">Ping Versuche</field>
+            <value name="VALUE">
+              <block type="math_number" id="8x!AJGJM|ZdLFXJZIVB$">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="5AM1vSN-a0Nk$RUGd2tC">
+                <value name="IF0">
+                  <block type="logic_negate" id="kd_7N.qJ=s#.Ix20d,ts">
+                    <value name="BOOL">
+                      <block type="get_value" id="rUkCQ%@,SC3UnB?HR6jZ">
+                        <field name="ATTR">val</field>
+                        <field name="OID">ping.0.ioBroker-Futro.192_168_1_1.alive</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="math_change" id="nCWt31GWTo=dXkd(/kc*">
+                    <field name="VAR" id="KY40~~YH):la_[s]Y+f;">Ping Versuche</field>
+                    <value name="DELTA">
+                      <shadow type="math_number" id="dP6R_6|Z70@l@YpT#nr4">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="RLpJ*a`Yg*-BfH(#tm;u">
+                    <value name="IF0">
+                      <block type="logic_negate" id="u3-tQw:tFHR%pDg$,-q4">
+                        <value name="BOOL">
+                          <block type="get_value" id="RY}sW#P7Gii+YWo17e8)">
+                            <field name="ATTR">val</field>
+                            <field name="OID">ping.0.ioBroker-Futro.192_168_1_6.alive</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="math_change" id="!84+5y^RL]8HX}#kYX%n">
+                        <field name="VAR" id="KY40~~YH):la_[s]Y+f;">Ping Versuche</field>
+                        <value name="DELTA">
+                          <shadow type="math_number" id="5e279(NAYp=~JVy0Q+3}">
+                            <field name="NUM">1</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="controls_if" id="RPYR}*Pi3kO]tF4%%d=L">
+                        <value name="IF0">
+                          <block type="logic_negate" id="r+SvoJ|$);5,#50+yKmM">
+                            <value name="BOOL">
+                              <block type="get_value" id="r[BvUm9HfL^1Ob.{()+P">
+                                <field name="ATTR">val</field>
+                                <field name="OID">ping.0.ioBroker-Futro.192_168_1_7.alive</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="math_change" id="*Cyu(_OF@DC6K^t,,a1V">
+                            <field name="VAR" id="KY40~~YH):la_[s]Y+f;">Ping Versuche</field>
+                            <value name="DELTA">
+                              <shadow type="math_number" id="ox!I2}_}#?H~pMpV~{Km">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="controls_if" id="=d0=meWO9KdV]i*oMa|l">
+                            <value name="IF0">
+                              <block type="logic_negate" id="|W:Pg)~TuIB9gABcY8d~">
+                                <value name="BOOL">
+                                  <block type="get_value" id="4,c_.dvEieDY-GZk-z:r">
+                                    <field name="ATTR">val</field>
+                                    <field name="OID">ping.0.ioBroker-Futro.192_168_1_8.alive</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="math_change" id="$Q0cmJ]/TP|-I:+^CsbR">
+                                <field name="VAR" id="KY40~~YH):la_[s]Y+f;">Ping Versuche</field>
+                                <value name="DELTA">
+                                  <shadow type="math_number" id="k1v*PxC}xXQfdZ4:p[0a">
+                                    <field name="NUM">1</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="controls_if" id="]:y]Rv/-.ztkQ71U[iRf">
+                                <value name="IF0">
+                                  <block type="logic_negate" id="[$V3B:@mShJ=-|/T`c3a">
+                                    <value name="BOOL">
+                                      <block type="get_value" id="Cbz(t.#3R5uK|uZ#,htr">
+                                        <field name="ATTR">val</field>
+                                        <field name="OID">ping.0.ioBroker-Futro.192_168_1_9.alive</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="math_change" id="k^i%Kox%i3JlNqI,2%R{">
+                                    <field name="VAR" id="KY40~~YH):la_[s]Y+f;">Ping Versuche</field>
+                                    <value name="DELTA">
+                                      <shadow type="math_number" id="4+5fYr4QFsfz(kCem*q+">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="update" id="6/xa3:N]/m+SJ1#HmTZf">
+                                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                    <field name="OID">0_userdata.0.Haustechnik.Netzwerk.Stromausfall_Versuche</field>
+                                    <field name="WITH_DELAY">FALSE</field>
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="tA)Yy==UAiP-O_$,z~im">
+                                        <field name="VAR" id="KY40~~YH):la_[s]Y+f;">Ping Versuche</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="on_ext" id=".Tmf7..m`I`ekVpUhola">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" items="1"></mutation>
+            <field name="CONDITION">ne</field>
+            <field name="ACK_CONDITION"></field>
+            <value name="OID0">
+              <shadow type="field_oid" id="z-g]sr0zD4fd}VMK1f,h">
+                <field name="oid">hmip.0.devices.3014F711A00000DD89B26ED2.channels.0.lowBat</field>
+              </shadow>
+              <block type="selector" id="ZdE;^INty+Ed4Q;`+b;P">
+                <field name="TEXT">state[id=*](functions=shellyonline)</field>
+              </block>
+            </value>
+            <statement name="STATEMENT">
+              <block type="variables_set" id="3tA{o#M_tBo[1?5j~G#x">
+                <field name="VAR" id="8`d$d|-e;,@SnMur8`_F">AnzahlOnline</field>
+                <value name="VALUE">
+                  <block type="math_number" id="pV~-|`:QTWjva,^VkG6$">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="^LS6]Vf#_/W*b?Dj*0QT">
+                    <field name="VAR" id="ya8}h]K_%v}hp%Yie?Y=">Text</field>
+                    <value name="VALUE">
+                      <block type="lists_create_with" id="^~JMyWTdIdrz*w6Mn.Yx">
+                        <mutation items="0"></mutation>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_forEach" id="F}dinmQmu9*)3pv_+s^W">
+                        <field name="VAR" id="iCuseR9iu];D).moPSZV">i</field>
+                        <value name="LIST">
+                          <block type="selector" id="9svA90/R$x$/t{ni#+E}">
+                            <field name="TEXT">state[id=*](functions=shellyonline)</field>
+                          </block>
+                        </value>
+                        <statement name="DO">
+                          <block type="variables_set" id="JWa(He(wCGhajJmwjgKt">
+                            <field name="VAR" id="Zx}WCtVD%O5~c0}gF32=">ShellyOnline</field>
+                            <value name="VALUE">
+                              <block type="text_join" id="8=`%aVb!8rj2)Q5?)tkI">
+                                <mutation items="3"></mutation>
+                                <value name="ADD0">
+                                  <block type="variables_get" id="*),K$#lR2_ZP6f]?o@L%">
+                                    <field name="VAR" id="iCuseR9iu];D).moPSZV">i</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="text" id="5,[kcFS:=q3t|$bMyEso">
+                                    <field name="TEXT">=</field>
+                                  </block>
+                                </value>
+                                <value name="ADD2">
+                                  <block type="get_value_var" id="8sbmqmtHgGmrQ06XX`k4">
+                                    <field name="ATTR">val</field>
+                                    <value name="OID">
+                                      <shadow type="text" id="U!n[@x(^jNEG?WcmVJ{$">
+                                        <field name="TEXT"></field>
+                                      </shadow>
+                                      <block type="variables_get" id="SJK%6t4ks{1[Dz:b;m[S">
+                                        <field name="VAR" id="iCuseR9iu];D).moPSZV">i</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="controls_if" id="I)8w%6Ub!UR{~l375q+(">
+                                <value name="IF0">
+                                  <block type="get_value_var" id="U~+L`to]|B_$CXN9Q5R/">
+                                    <field name="ATTR">val</field>
+                                    <value name="OID">
+                                      <shadow type="text" id="0v_}:+~DUD(pJhX]tgJT">
+                                        <field name="TEXT"></field>
+                                      </shadow>
+                                      <block type="variables_get" id=")W|+7NhY)u5Vo{d0tDi{">
+                                        <field name="VAR" id="iCuseR9iu];D).moPSZV">i</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="math_change" id="JDVvF?Bwc,Fi+q)pbXHZ">
+                                    <field name="VAR" id="8`d$d|-e;,@SnMur8`_F">AnzahlOnline</field>
+                                    <value name="DELTA">
+                                      <shadow type="math_number" id="y]rF1!4S85jzU*~.s)*r">
+                                        <field name="NUM">1</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="lists_setIndex" id="*@7iH@0E}N_YOJ[jB]9s">
+                                    <mutation at="false"></mutation>
+                                    <field name="MODE">INSERT</field>
+                                    <field name="WHERE">FIRST</field>
+                                    <value name="LIST">
+                                      <block type="variables_get" id="BDfdMJ}5Ag^Q)DHcn*!p">
+                                        <field name="VAR" id="ya8}h]K_%v}hp%Yie?Y=">Text</field>
+                                      </block>
+                                    </value>
+                                    <value name="TO">
+                                      <block type="variables_get" id="azXsY*6@!;v(2#9f~0$X">
+                                        <field name="VAR" id="Zx}WCtVD%O5~c0}gF32=">ShellyOnline</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="update" id="K}{Ask!8(gYu20`bJI*T">
+                            <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                            <field name="OID">0_userdata.0.Haustechnik.Netzwerk.ShellysOnline</field>
+                            <field name="WITH_DELAY">FALSE</field>
+                            <value name="VALUE">
+                              <block type="variables_get" id="=;q+aC83mPiqc3^^JPR^">
+                                <field name="VAR" id="ya8}h]K_%v}hp%Yie?Y=">Text</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="update" id="IU5a~OQg5V(ljcIpMV55">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                <field name="OID">0_userdata.0.Haustechnik.Netzwerk.AnzahlOnline</field>
+                                <field name="WITH_DELAY">FALSE</field>
+                                <value name="VALUE">
+                                  <block type="variables_get" id="$8iMs7}cBA)1pmp8ESCy">
+                                    <field name="VAR" id="8`d$d|-e;,@SnMur8`_F">AnzahlOnline</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
