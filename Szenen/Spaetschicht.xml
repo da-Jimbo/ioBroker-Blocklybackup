@@ -1,0 +1,485 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="comment" id="_[[1f~I:.w!}LEWY@od%" x="88" y="-37">
+    <field name="COMMENT">Wenn nach 21Uhr die Tür geöffnet wird,</field>
+    <next>
+      <block type="comment" id="L][UWz{Alb7FDT!myk}W">
+        <field name="COMMENT">Garderobe und Küchenarbeitsplatte einschalten</field>
+        <next>
+          <block type="comment" id="~BMHHnuVh[vAXz*~#eZ|">
+            <field name="COMMENT">Wenn dann Küche ausgemacht wird, </field>
+            <next>
+              <block type="on" id="ddUeJFSqHTG2)6rfh=r%">
+                <field name="OID">0_userdata.0.Türen/Fenster.Garage.Garage</field>
+                <field name="CONDITION">ne</field>
+                <field name="ACK_CONDITION"></field>
+                <statement name="STATEMENT">
+                  <block type="controls_if" id="gA@dc!M`lK[c}LSE84yD">
+                    <value name="IF0">
+                      <block type="logic_negate" id="qi6:{!+LOm`(`d!h)xrQ">
+                        <value name="BOOL">
+                          <block type="get_value" id="p(f85?6,/RG;PUAQwU(Q">
+                            <field name="ATTR">val</field>
+                            <field name="OID">0_userdata.0.Zeitfunktionen.Urlaub</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="controls_if" id="QAOSph3*qdoDr!5aEkKe">
+                        <value name="IF0">
+                          <block type="logic_negate" id="iD_p*:uGrx!J(6+4YqU#">
+                            <value name="BOOL">
+                              <block type="get_value" id="^@c~T)$|/.]4#`Xuezjn">
+                                <field name="ATTR">val</field>
+                                <field name="OID">0_userdata.0.Zeitfunktionen.Wochenende</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="controls_if" id="[9ZaR?d1}oN8T}#hc3om">
+                            <value name="IF0">
+                              <block type="logic_compare" id="A(;MZ{*n)0I3tdKo_DfI">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="get_value" id="]UR?=F#OOYt--j$DxG4!">
+                                    <field name="ATTR">val</field>
+                                    <field name="OID">0_userdata.0.Zeitfunktionen.Schicht</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="n!2q($OF=[[rv[~+Tgh|">
+                                    <field name="NUM">2</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="controls_if" id="yhf=M9rLPAmOw?cbX+`r">
+                                <value name="IF0">
+                                  <block type="time_compare_ex" id="Z!dlcNY0S;BFGwrrEXmJ">
+                                    <mutation xmlns="http://www.w3.org/1999/xhtml" end_time="true" actual_time="true"></mutation>
+                                    <field name="USE_ACTUAL_TIME">TRUE</field>
+                                    <field name="OPTION">between</field>
+                                    <value name="START_TIME">
+                                      <shadow type="text" id="(1WQCx*u7]=^Gq5/uEwp">
+                                        <field name="TEXT">22:00</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="END_TIME">
+                                      <shadow type="text" id="WdEL`]]cB4L7{GLnnxG6">
+                                        <field name="TEXT">23:00</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="controls_if" id="rS4z*CU;vhH0oZ}m$2X~">
+                                    <value name="IF0">
+                                      <block type="logic_compare" id="X%isOwgr9faqd[Q=0%Tf">
+                                        <field name="OP">EQ</field>
+                                        <value name="A">
+                                          <block type="get_value" id="f0$39UQdKpG+AE8uFG5P">
+                                            <field name="ATTR">val</field>
+                                            <field name="OID">0_userdata.0.Türen/Fenster.Garage.Garage</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="math_number" id="pGOGm8]RF@f^ZzAd8tYx">
+                                            <field name="NUM">0</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="controls_if" id="5!hF!%z@0uI_AASc+nej">
+                                        <value name="IF0">
+                                          <block type="logic_negate" id="co)vM_`wv=QQu*P^Y3mv">
+                                            <value name="BOOL">
+                                              <block type="get_value" id="m,JI_Ins$2=5c)^JHLRr">
+                                                <field name="ATTR">val</field>
+                                                <field name="OID">ping.0.ioBroker-Futro.192_168_1_101.alive</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="controls_if" id="Aqv9-y+TEo*O13%b/3YZ">
+                                            <value name="IF0">
+                                              <block type="logic_compare" id="hSo{)zTN};{pvbE+aYG-">
+                                                <field name="OP">NEQ</field>
+                                                <value name="A">
+                                                  <block type="time_get" id="TYgf;5QFUo+MqG0$#f9.">
+                                                    <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                                                    <field name="OPTION">wd</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="math_number" id="E:K7vmS?YswOT^,sS3k?">
+                                                    <field name="NUM">5</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="control" id="%g-}NMB(**08]TqjiSUF">
+                                                <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                <field name="OID">0_userdata.0.Geräte.Zigbee.2OG.Ost.monitore</field>
+                                                <field name="WITH_DELAY">FALSE</field>
+                                                <value name="VALUE">
+                                                  <block type="logic_boolean" id="gQEFn.JRkxZ6yzj(bp5R">
+                                                    <field name="BOOL">TRUE</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="telegram" id="d;oPUZ;^l9EkY)2e0GPi">
+                                                <field name="INSTANCE">.0</field>
+                                                <field name="LOG"></field>
+                                                <field name="SILENT">FALSE</field>
+                                                <field name="PARSEMODE">HTML</field>
+                                                <field name="ESCAPING">FALSE</field>
+                                                <field name="DISABLE_WEB_PAGE_PREVIEW">FALSE</field>
+                                                <value name="MESSAGE">
+                                                  <shadow type="text" id="ig~5P4O;DP,hZM3PjpTI">
+                                                    <field name="TEXT">text</field>
+                                                  </shadow>
+                                                  <block type="text" id="}%pM;9mPjI=^MGP:(uSV">
+                                                    <field name="TEXT">Haustür wird geöffnet!</field>
+                                                  </block>
+                                                </value>
+                                                <value name="USERNAME">
+                                                  <block type="text" id="NP@f[[H6{}Qp42*J]bJ,">
+                                                    <field name="TEXT">Chriss</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="timeouts_wait" id="`h{+7nYW~8gy;7ApCU6p">
+                                                    <field name="DELAY">10</field>
+                                                    <field name="UNIT">sec</field>
+                                                    <next>
+                                                      <block type="control" id="b.[Y)cgV$6G28)K.{xQN">
+                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                        <field name="OID">nuki-extended.0.smartlocks.haustür._ACTION.UNLATCH</field>
+                                                        <field name="WITH_DELAY">FALSE</field>
+                                                        <value name="VALUE">
+                                                          <block type="logic_boolean" id="WnKs(16MKbnT+:IqXk,W">
+                                                            <field name="BOOL">TRUE</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </statement>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                  </block>
+                </statement>
+                <next>
+                  <block type="on" id=",NL%#%+UNhHH)7?10-N^">
+                    <field name="OID">0_userdata.0.Türen/Fenster.Haustüre.status</field>
+                    <field name="CONDITION">ne</field>
+                    <field name="ACK_CONDITION"></field>
+                    <statement name="STATEMENT">
+                      <block type="controls_if" id="8Bh_oyVJBqJhRwXFXTV)">
+                        <value name="IF0">
+                          <block type="logic_negate" id="dI.G#mR+HKL*fRQM(eSj">
+                            <value name="BOOL">
+                              <block type="get_value" id="4h_,H)y27`XwrN61sQ@G">
+                                <field name="ATTR">val</field>
+                                <field name="OID">0_userdata.0.Zeitfunktionen.Urlaub</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="controls_if" id="SL6GTBM2;,^n~m=h#c;;">
+                            <value name="IF0">
+                              <block type="logic_negate" id="^sr)*m3{jy3vAU?E@L,v">
+                                <value name="BOOL">
+                                  <block type="get_value" id="YC0xM@jMB/U1q70[+It2">
+                                    <field name="ATTR">val</field>
+                                    <field name="OID">0_userdata.0.Zeitfunktionen.Wochenende</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="controls_if" id="yV)GSSJp6{]^JX@^DL?_">
+                                <value name="IF0">
+                                  <block type="logic_compare" id="}5@{cg]U@b(v;P@#i8no">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="get_value" id="1!(dr;hp+?C@*!#+1$/N">
+                                        <field name="ATTR">val</field>
+                                        <field name="OID">0_userdata.0.Zeitfunktionen.Schicht</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="kXNZlMfQ3RwwR!E!nt5V">
+                                        <field name="NUM">2</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="controls_if" id="fN4Y_MT5a}|}^P`/s[xy">
+                                    <value name="IF0">
+                                      <block type="time_compare_ex" id="DHTa#}NbXe3#mdGg(lkU">
+                                        <mutation xmlns="http://www.w3.org/1999/xhtml" end_time="true" actual_time="true"></mutation>
+                                        <field name="USE_ACTUAL_TIME">TRUE</field>
+                                        <field name="OPTION">between</field>
+                                        <value name="START_TIME">
+                                          <shadow type="text" id="hY}PScyE8qjHFmM@0UUK">
+                                            <field name="TEXT">21:45</field>
+                                          </shadow>
+                                        </value>
+                                        <value name="END_TIME">
+                                          <shadow type="text" id="cV+|)=T9`TPA;8bzb_5y">
+                                            <field name="TEXT">23:59</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="controls_if" id="9MUis*q9fv7yG7e0i%m:">
+                                        <value name="IF0">
+                                          <block type="on_source" id="?09{DuP-l[]`luAf!sCS">
+                                            <field name="ATTR">state.val</field>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="control_ex" id="AV]O).c5XL+jKI1PN~hp">
+                                            <field name="TYPE">false</field>
+                                            <field name="CLEAR_RUNNING">FALSE</field>
+                                            <value name="OID">
+                                              <shadow type="field_oid" id="!1:0Y@|g{*Ehqb9W8@(m">
+                                                <field name="oid">shelly.0.SHSW-1#E0A0A9#1.Relay0.Switch</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="VALUE">
+                                              <shadow type="logic_boolean" id=")eDgdWb~MyM]$UZtr,_R">
+                                                <field name="BOOL">TRUE</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="DELAY_MS">
+                                              <shadow type="math_number" id=")@RN4$:])6czB-sBgg)]">
+                                                <field name="NUM">0</field>
+                                              </shadow>
+                                            </value>
+                                            <next>
+                                              <block type="control_ex" id="NVKL7Wr8!@$u4f_#DE(y">
+                                                <field name="TYPE">false</field>
+                                                <field name="CLEAR_RUNNING">FALSE</field>
+                                                <value name="OID">
+                                                  <shadow type="field_oid" id="r*(28ikH7m3)/02jwXmL">
+                                                    <field name="oid">shelly.0.SHSW-1#E098069532CD#1.Relay0.Switch</field>
+                                                  </shadow>
+                                                </value>
+                                                <value name="VALUE">
+                                                  <shadow type="logic_boolean" id="2DkX:3?@i5EP6%5!fD39">
+                                                    <field name="BOOL">TRUE</field>
+                                                  </shadow>
+                                                </value>
+                                                <value name="DELAY_MS">
+                                                  <shadow type="math_number" id="eqBmr]m=rwveG!obo%_V">
+                                                    <field name="NUM">0</field>
+                                                  </shadow>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </statement>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="on" id="TV:O60jz@Osd*_A/*J$j">
+                        <field name="OID">shelly.0.SHSW-1#E098069532CD#1.Relay0.Switch</field>
+                        <field name="CONDITION">ne</field>
+                        <field name="ACK_CONDITION"></field>
+                        <statement name="STATEMENT">
+                          <block type="controls_if" id="qIo,`V}txtW=m5Z=ey!Z">
+                            <value name="IF0">
+                              <block type="logic_negate" id="2jTPjzoRD[aerewhFuGs">
+                                <value name="BOOL">
+                                  <block type="get_value" id="e!A~S)#$cFY[R#/qj;Gt">
+                                    <field name="ATTR">val</field>
+                                    <field name="OID">0_userdata.0.Zeitfunktionen.Urlaub</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="controls_if" id="]U,A(Wzmkw+@c@17fA{{">
+                                <value name="IF0">
+                                  <block type="logic_negate" id="tl|BlIFO1#5_RH;5E`WY">
+                                    <value name="BOOL">
+                                      <block type="get_value" id="2Y[^A]d7S`w+7}oo4Lq}">
+                                        <field name="ATTR">val</field>
+                                        <field name="OID">0_userdata.0.Zeitfunktionen.Wochenende</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="controls_if" id="eV8OsyJwIW6+i)lC%2yB">
+                                    <value name="IF0">
+                                      <block type="logic_compare" id="5{k1b0uVSR%w_m}J9Xg(">
+                                        <field name="OP">EQ</field>
+                                        <value name="A">
+                                          <block type="get_value" id="C{q%Dx8@vwnokGkGTF[E">
+                                            <field name="ATTR">val</field>
+                                            <field name="OID">0_userdata.0.Zeitfunktionen.Schicht</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="math_number" id="[9}.Yp:#3oPzN|ohx*qH">
+                                            <field name="NUM">2</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="controls_if" id="nZK~=JISG!Z#DbN$PolB">
+                                        <value name="IF0">
+                                          <block type="time_compare_ex" id="CG:Uuz?M2yjV4:U#fHj1">
+                                            <mutation xmlns="http://www.w3.org/1999/xhtml" end_time="true" actual_time="true"></mutation>
+                                            <field name="USE_ACTUAL_TIME">TRUE</field>
+                                            <field name="OPTION">between</field>
+                                            <value name="START_TIME">
+                                              <shadow type="text" id="7}T!w.EE0pod/:*mg|X*">
+                                                <field name="TEXT">21:45</field>
+                                              </shadow>
+                                            </value>
+                                            <value name="END_TIME">
+                                              <shadow type="text" id="fWgM,@y?bvtJx8#wicN2">
+                                                <field name="TEXT">22:59</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="controls_if" id=":Akf;QpF2yf-,N:AzkTB">
+                                            <value name="IF0">
+                                              <block type="logic_negate" id=",8ye@3]Mod{i/AS/6D;[">
+                                                <value name="BOOL">
+                                                  <block type="on_source" id="1=6;X9[d#2-}J#ORTIAY">
+                                                    <field name="ATTR">state.val</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="controls_if" id="N-4:yiD1RYF5ZKHjkPhh">
+                                                <value name="IF0">
+                                                  <block type="logic_compare" id="=Cz6{`[|;1q-]Dq8ZDvY">
+                                                    <field name="OP">NEQ</field>
+                                                    <value name="A">
+                                                      <block type="time_get" id=".ICvj$D4pE`;3rd0|;mV">
+                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                                                        <field name="OPTION">wd</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="B">
+                                                      <block type="math_number" id="8?7RuJgC),LEGGeNeu$q">
+                                                        <field name="NUM">5</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="control" id="lg0p8nrdf?^V]fa/r%3Y">
+                                                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                    <field name="OID">nuki-extended.0.smartlocks.haustür._ACTION.LOCK</field>
+                                                    <field name="WITH_DELAY">FALSE</field>
+                                                    <value name="VALUE">
+                                                      <block type="logic_boolean" id="[lun4;Y|93LRRH{*J{]!">
+                                                        <field name="BOOL">TRUE</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="control" id="[3(kf!Oq_wX5-W1Pt-%;">
+                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                        <field name="OID">0_userdata.0.Haustechnik.Licht.Büro.Monitore</field>
+                                                        <field name="WITH_DELAY">FALSE</field>
+                                                        <value name="VALUE">
+                                                          <block type="logic_boolean" id="Ig5e)~{)tyA/XH6dxeFv">
+                                                            <field name="BOOL">TRUE</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <block type="timeouts_wait" id="Dq=E59d_|l5f]oKabJME">
+                                                    <field name="DELAY">5</field>
+                                                    <field name="UNIT">sec</field>
+                                                    <next>
+                                                      <block type="control_ex" id="~$4MN6d{1|C7/,`ynp{n">
+                                                        <field name="TYPE">false</field>
+                                                        <field name="CLEAR_RUNNING">FALSE</field>
+                                                        <value name="OID">
+                                                          <shadow type="field_oid" id="Y|J6MU2bP,W|#xk0vub|">
+                                                            <field name="oid">shelly.0.SHSW-1#E0A0A9#1.Relay0.Switch</field>
+                                                          </shadow>
+                                                        </value>
+                                                        <value name="VALUE">
+                                                          <shadow type="logic_boolean" id="kKs:5So*9#je(pR}7H!M">
+                                                            <field name="BOOL">FALSE</field>
+                                                          </shadow>
+                                                        </value>
+                                                        <value name="DELAY_MS">
+                                                          <shadow type="math_number" id="|;e~T8F/kigr^O#ms^n/">
+                                                            <field name="NUM">0</field>
+                                                          </shadow>
+                                                        </value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </statement>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
