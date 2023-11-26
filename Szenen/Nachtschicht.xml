@@ -1,0 +1,261 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="*I_:j]un].Z?y_1Qjr]~">JSON</variable>
+    <variable type="timeout" id="Kellerlicht">Kellerlicht</variable>
+  </variables>
+  <block type="on" id=",NL%#%+UNhHH)7?10-N^" x="288" y="90">
+    <field name="OID">mqtt.0.shellyplus1-Keller_West.status.switch:0</field>
+    <field name="CONDITION">ne</field>
+    <field name="ACK_CONDITION"></field>
+    <statement name="STATEMENT">
+      <block type="controls_if" id="ZRD(8R5K17ms$zSV~lPg">
+        <value name="IF0">
+          <block type="logic_negate" id="ZZ[?kY%](cv@gexpvm8A">
+            <value name="BOOL">
+              <block type="get_value" id="a:Isw-q(6@LU_/BY|H)5">
+                <field name="ATTR">val</field>
+                <field name="OID">0_userdata.0.Zeitfunktionen.Urlaub</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="controls_if" id="9~1iNoJLq7Fq$kF{!PXj">
+            <value name="IF0">
+              <block type="logic_negate" id="$#qfib{hkeuv73cK6OG;">
+                <value name="BOOL">
+                  <block type="get_value" id="`T}7%fIPnBJE|Fp%6DM:">
+                    <field name="ATTR">val</field>
+                    <field name="OID">0_userdata.0.Zeitfunktionen.Wochenende</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="controls_if" id="yV)GSSJp6{]^JX@^DL?_">
+                <value name="IF0">
+                  <block type="logic_compare" id="}5@{cg]U@b(v;P@#i8no">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="get_value" id="1!(dr;hp+?C@*!#+1$/N">
+                        <field name="ATTR">val</field>
+                        <field name="OID">0_userdata.0.Zeitfunktionen.Schicht</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="kXNZlMfQ3RwwR!E!nt5V">
+                        <field name="NUM">3</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="variables_set" id="uFwSDxAvM@VtHvULw,6s">
+                    <field name="VAR" id="*I_:j]un].Z?y_1Qjr]~">JSON</field>
+                    <value name="VALUE">
+                      <block type="get_attr" id="V_vUI@zN!Y^[!*mh8*#4">
+                        <value name="PATH">
+                          <shadow type="text" id="OHMvRD*3T~og@ZSqTQyQ">
+                            <field name="TEXT">output</field>
+                          </shadow>
+                        </value>
+                        <value name="OBJECT">
+                          <block type="on_source" id="~P-$E|F}U)HiDI;GD%=j">
+                            <field name="ATTR">state.val</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="fN4Y_MT5a}|}^P`/s[xy">
+                        <value name="IF0">
+                          <block type="logic_operation" id="@sH2h1tgX=R`@4Z|HSA%">
+                            <field name="OP">AND</field>
+                            <value name="A">
+                              <block type="logic_compare" id="fQ~4R;prag7W8cj5+D__">
+                                <field name="OP">GTE</field>
+                                <value name="A">
+                                  <block type="time_get" id="lnOm@{`PQ6a5f;Hk6q6k">
+                                    <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                                    <field name="OPTION">h</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="chlIII_+1aQwM23:#!H+">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="logic_compare" id=",6b8gw?qtS+##OyS.Z)I">
+                                <field name="OP">LTE</field>
+                                <value name="A">
+                                  <block type="time_get" id="s;q81CWtHaUQR(Ny#HXU">
+                                    <mutation xmlns="http://www.w3.org/1999/xhtml" format="false" language="false"></mutation>
+                                    <field name="OPTION">h</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="ae{Qt~?+2~,G=zA.5OKQ">
+                                    <field name="NUM">7</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="controls_if" id="aCT-)a=lCLyL%;u!P=f1">
+                            <value name="IF0">
+                              <block type="variables_get" id="-tjG.|Iz~R|q=v]}!U`n">
+                                <field name="VAR" id="*I_:j]un].Z?y_1Qjr]~">JSON</field>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="control" id="j3=cG-k{jk?j7s|yRTO*">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                <field name="OID">shelly.0.SHSW-25#98CDAC3791FB#1.Relay0.Switch</field>
+                                <field name="WITH_DELAY">FALSE</field>
+                                <value name="VALUE">
+                                  <block type="logic_boolean" id=",t#;ni7s9v*K[HDztqEk">
+                                    <field name="BOOL">TRUE</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="update" id="n1VGKwmjOt1w^Uwo-vv^">
+                                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                    <field name="OID">0_userdata.0.Haustechnik.Licht.Keller.Kellergang</field>
+                                    <field name="WITH_DELAY">FALSE</field>
+                                    <value name="VALUE">
+                                      <block type="logic_boolean" id="^PQy4Ld@+AIU!LUI6R(H">
+                                        <field name="BOOL">FALSE</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="timeouts_wait" id="(?Vmk%]p9$vrt):)KFn:">
+                                        <field name="DELAY">5</field>
+                                        <field name="UNIT">sec</field>
+                                        <next>
+                                          <block type="update" id="nxr=N~Pe:,4G_DKEvOyT">
+                                            <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                            <field name="OID">0_userdata.0.Haustechnik.Licht.Werkstatt.Licht</field>
+                                            <field name="WITH_DELAY">FALSE</field>
+                                            <value name="VALUE">
+                                              <block type="logic_boolean" id="8`tYOBD1i8K2}sQEdQPT">
+                                                <field name="BOOL">FALSE</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="control" id="!H`/b,b|:??fWP)gEfcp">
+                                                <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                <field name="OID">0_userdata.0.Haustechnik.Entfeuchtung_Keller.freigabe</field>
+                                                <field name="WITH_DELAY">FALSE</field>
+                                                <value name="VALUE">
+                                                  <block type="logic_boolean" id="9/jg,lqg5|QZIZ73]=~p">
+                                                    <field name="BOOL">FALSE</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="timeouts_cleartimeout" id="4Y=FcsQd2iR*g{~gL|pM">
+                                                    <field name="NAME">Kellerlicht</field>
+                                                    <next>
+                                                      <block type="timeouts_settimeout" id="Ba1umFmC3}Ezmz_j7GRH">
+                                                        <field name="NAME">Kellerlicht</field>
+                                                        <field name="DELAY">5</field>
+                                                        <field name="UNIT">min</field>
+                                                        <statement name="STATEMENT">
+                                                          <block type="update" id="IETW~-l@KruuSdJD:nX@">
+                                                            <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                                            <field name="OID">shelly.0.SHSW-25#98CDAC3791FB#1.Relay0.Switch</field>
+                                                            <field name="WITH_DELAY">FALSE</field>
+                                                            <value name="VALUE">
+                                                              <block type="logic_boolean" id="8CDWDpIf]z-*DoO@@.wC">
+                                                                <field name="BOOL">FALSE</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </statement>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <next>
+      <block type="on" id="WPp8xT*d.aB9Tnnf.a+2">
+        <field name="OID">shelly.0.SHSW-25#98CDAC3791FB#1.Relay0.Switch</field>
+        <field name="CONDITION">true</field>
+        <field name="ACK_CONDITION"></field>
+        <statement name="STATEMENT">
+          <block type="controls_if" id="x5*_ZBht#4Kk-V/739#b">
+            <value name="IF0">
+              <block type="logic_compare" id="csZWIx!qga,Ny10!=@=,">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="get_value" id="C$J6C*i9jPsyFAzsQ:UE">
+                    <field name="ATTR">val</field>
+                    <field name="OID">0_userdata.0.Zeitfunktionen.Schicht</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="=gVw(n3hW11z~7@c@Il0">
+                    <field name="NUM">3</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="controls_if" id="l.`J6!_hu]:F9OV7E1nw">
+                <value name="IF0">
+                  <block type="time_compare_ex" id=";KORW2@t()bQM`%lQogC">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" end_time="false" actual_time="true"></mutation>
+                    <field name="USE_ACTUAL_TIME">TRUE</field>
+                    <field name="OPTION">&gt;</field>
+                    <value name="START_TIME">
+                      <shadow type="text" id="riuga%6z9Lz+`w1_.]$7">
+                        <field name="TEXT">13:00</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="control" id="x)d[gJE#XaoC)|j}]A]~">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                    <field name="OID">0_userdata.0.Haustechnik.Entfeuchtung_Keller.freigabe</field>
+                    <field name="WITH_DELAY">FALSE</field>
+                    <value name="VALUE">
+                      <block type="logic_boolean" id="^J!`E!4s)bbWx%JC8J45">
+                        <field name="BOOL">TRUE</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>
