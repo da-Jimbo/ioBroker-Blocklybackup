@@ -1,1 +1,1 @@
-<img src"logo_vertical.svg">
+<img src"Blockly-Logo.png">
