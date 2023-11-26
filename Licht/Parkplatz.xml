@@ -1,0 +1,498 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="Q}JGGu*bh6v|oOe33z9~">Parkplatz</variable>
+    <variable id="js$}Tw(W)EOFJmP2Xa-]">Bewegung</variable>
+    <variable id="8x;R6_d@D/.g$|EZ|+X~">Haustür</variable>
+    <variable type="timeout" id="Parkplatzlicht aus2">Parkplatzlicht aus2</variable>
+  </variables>
+  <block type="on" id="REAvE]IvdB=Hb~NE*Y`$" x="63" y="-462">
+    <field name="OID">mqtt.0.Parkplatzlicht.status.input:0</field>
+    <field name="CONDITION">ne</field>
+    <field name="ACK_CONDITION"></field>
+    <statement name="STATEMENT">
+      <block type="variables_set" id="k*?`1=#7PD]*xC@FU.6[">
+        <field name="VAR" id="Q}JGGu*bh6v|oOe33z9~">Parkplatz</field>
+        <value name="VALUE">
+          <block type="on_source" id="SIfS@~M)fxZ%5Iry|cCl">
+            <field name="ATTR">state.val</field>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="4IJByiS=i7-9)4Wl_U``">
+            <mutation elseif="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="rC8yC}B.t*=rEY1?poGA">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get" id="H?a/pD%$GO$$S%r+TgB8">
+                    <field name="VAR" id="Q}JGGu*bh6v|oOe33z9~">Parkplatz</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="text" id="U@D*k$DINEAQ6oA4ryLC">
+                    <field name="TEXT">{"id":0,"state":true}</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="control" id="9)J=bQyz17AZOL?N#^`W">
+                <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Bewegung_Parkplatz</field>
+                <field name="WITH_DELAY">FALSE</field>
+                <value name="VALUE">
+                  <block type="logic_boolean" id="v7o,rmuiq]~}Mc;}!Y(l">
+                    <field name="BOOL">TRUE</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="request" id="krZr4i8]$?c`1H70`GKB">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" with_statement="false"></mutation>
+                    <field name="WITH_STATEMENT">FALSE</field>
+                    <field name="LOG"></field>
+                    <value name="URL">
+                      <shadow type="text" id="Z_t@R5/fWn:?Oh[VbHR4">
+                        <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=27&amp;Standort=1020</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <value name="IF1">
+              <block type="logic_compare" id="C0IF7)rpx#5RwrM8[J=N">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get" id="msk84plvJ~QD?%dQS;q}">
+                    <field name="VAR" id="Q}JGGu*bh6v|oOe33z9~">Parkplatz</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="text" id="FEc0gf~bYTq`*#.0Yle9">
+                    <field name="TEXT">{"id":0,"state":false}</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO1">
+              <block type="control" id="D_}6g`+_.aIjMLL{b7wB">
+                <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Bewegung_Parkplatz</field>
+                <field name="WITH_DELAY">FALSE</field>
+                <value name="VALUE">
+                  <block type="logic_boolean" id=",M3(^#8R%)+Nw-7;M92j">
+                    <field name="BOOL">FALSE</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="on" id="o7g@W8N]D(MsWO.S/xv_">
+        <field name="OID">mqtt.0.Parkplatzlicht.status.input:1</field>
+        <field name="CONDITION">ne</field>
+        <field name="ACK_CONDITION"></field>
+        <statement name="STATEMENT">
+          <block type="variables_set" id="5`=B05Ij4O#HwsNnW@#y">
+            <field name="VAR" id="8x;R6_d@D/.g$|EZ|+X~">Haustür</field>
+            <value name="VALUE">
+              <block type="on_source" id="u1]92X?rcPRjHq3S;k|~">
+                <field name="ATTR">state.val</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="e90ncI*G0PO]p[W7qh!I">
+                <mutation elseif="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare" id="vRLY8C6sy*hMA7d(hRSi">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="variables_get" id="%d7^QIFXFeDy6daCi=Mm">
+                        <field name="VAR" id="8x;R6_d@D/.g$|EZ|+X~">Haustür</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="text" id="Y3Vb%@^rB%Hc{9/aDc#g">
+                        <field name="TEXT">{"id":1,"state":true}</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="control" id="DeW0zAAdl{i1t1V[lG@q">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                    <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Bewegung_Haustür</field>
+                    <field name="WITH_DELAY">FALSE</field>
+                    <value name="VALUE">
+                      <block type="logic_boolean" id="+l|++T.KUEav:@zr_nCB">
+                        <field name="BOOL">TRUE</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="request" id="~y;LE/32``p*_AMo+KoY">
+                        <mutation xmlns="http://www.w3.org/1999/xhtml" with_statement="false"></mutation>
+                        <field name="WITH_STATEMENT">FALSE</field>
+                        <field name="LOG"></field>
+                        <value name="URL">
+                          <shadow type="text" id="+UHLbl2?!t5)S}@]l6?2">
+                            <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=27&amp;Standort=1021</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <value name="IF1">
+                  <block type="logic_compare" id="FFQrrxG(=0mSDM`xg0E8">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="variables_get" id=")IokQ+72GgsmDe+iSPr(">
+                        <field name="VAR" id="8x;R6_d@D/.g$|EZ|+X~">Haustür</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="text" id="-$NM-sm}lrh46X$?LKjP">
+                        <field name="TEXT">{"id":1,"state":false}</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO1">
+                  <block type="control" id="^njCJdu=y`tDZ#.XHo0J">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                    <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Bewegung_Haustür</field>
+                    <field name="WITH_DELAY">FALSE</field>
+                    <value name="VALUE">
+                      <block type="logic_boolean" id="k;rP|Em9R8LHj~P]Gx3_">
+                        <field name="BOOL">FALSE</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="on" id="o1Em$(J%~7aAr|$3Sh/y">
+            <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Bewegung_Parkplatz</field>
+            <field name="CONDITION">ne</field>
+            <field name="ACK_CONDITION"></field>
+            <statement name="STATEMENT">
+              <block type="procedures_callnoreturn" id="]pjOIPDyLQQ-J)L1agye">
+                <mutation name="Parkplatzlicht"></mutation>
+              </block>
+            </statement>
+            <next>
+              <block type="on" id="+!Xzpuz8@anjoh/]@fxq">
+                <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Bewegung_Haustür</field>
+                <field name="CONDITION">ne</field>
+                <field name="ACK_CONDITION"></field>
+                <statement name="STATEMENT">
+                  <block type="procedures_callnoreturn" id="+|lOT/LG%eGSEHPd@{Hh">
+                    <mutation name="Parkplatzlicht"></mutation>
+                  </block>
+                </statement>
+                <next>
+                  <block type="on" id="CbOKwrB@yo`KQR}Wv+TQ">
+                    <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Licht_Parkplatz</field>
+                    <field name="CONDITION">ne</field>
+                    <field name="ACK_CONDITION"></field>
+                    <statement name="STATEMENT">
+                      <block type="controls_if" id="lGNPO/+$JygpjAkuLk6t">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                          <block type="on_source" id=",5iPe/E_c.z=+SC*re`g">
+                            <field name="ATTR">state.val</field>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="exec" id="fD-}tU*VAZ@6-ke[XawM">
+                            <mutation xmlns="http://www.w3.org/1999/xhtml" with_statement="false"></mutation>
+                            <field name="WITH_STATEMENT">FALSE</field>
+                            <field name="LOG"></field>
+                            <value name="COMMAND">
+                              <shadow type="text" id="6^!cG{!u;7vVlA_~,Qsi">
+                                <field name="TEXT">curl "http://192.168.1.189/rpc/Switch.Set?id=0&amp;on=true"</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="request" id="EPE3~P$.t94Nkc-_k6~U">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" with_statement="false"></mutation>
+                                <field name="WITH_STATEMENT">FALSE</field>
+                                <field name="LOG"></field>
+                                <value name="URL">
+                                  <shadow type="text" id="lYxAy3)X2I_%.f}hw1)z">
+                                    <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=70&amp;Standort=1020</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="exec" id="^+#ZHoV[m#77KSYhEff0">
+                            <mutation xmlns="http://www.w3.org/1999/xhtml" with_statement="false"></mutation>
+                            <field name="WITH_STATEMENT">FALSE</field>
+                            <field name="LOG"></field>
+                            <value name="COMMAND">
+                              <shadow type="text" id="!%=#JJ2EvWCiOiD;Kjx~">
+                                <field name="TEXT">curl "http://192.168.1.189/rpc/Switch.Set?id=0&amp;on=false"</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="request" id="EiRL3IF*1Ba`!;Z|jSA6">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" with_statement="false"></mutation>
+                                <field name="WITH_STATEMENT">FALSE</field>
+                                <field name="LOG"></field>
+                                <value name="URL">
+                                  <shadow type="text" id="YDBz%2X8X[ifix;6CABt">
+                                    <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=71&amp;Standort=1020</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="on" id=":+d5Yk}`zhIIZgz0K#QF">
+                        <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Steckdose_Parkplatz</field>
+                        <field name="CONDITION">ne</field>
+                        <field name="ACK_CONDITION"></field>
+                        <statement name="STATEMENT">
+                          <block type="controls_if" id="1+`!tw7eCB[d+rBzaB{Q">
+                            <mutation else="1"></mutation>
+                            <value name="IF0">
+                              <block type="on_source" id="?/TO~(#qbmSZ8!N{:]Cc">
+                                <field name="ATTR">state.val</field>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="exec" id="/uXVsOBcV=cH^#eG6)yi">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" with_statement="false"></mutation>
+                                <field name="WITH_STATEMENT">FALSE</field>
+                                <field name="LOG"></field>
+                                <value name="COMMAND">
+                                  <shadow type="text" id=":E~=;,35rf;4~pcAD=?_">
+                                    <field name="TEXT">curl "http://192.168.1.189/rpc/Switch.Set?id=1&amp;on=true"</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="request" id="c[QMc]QpRxvYx^kuf/VD">
+                                    <mutation xmlns="http://www.w3.org/1999/xhtml" with_statement="false"></mutation>
+                                    <field name="WITH_STATEMENT">FALSE</field>
+                                    <field name="LOG"></field>
+                                    <value name="URL">
+                                      <shadow type="text" id=".w?18e+m!7[!!2t4.?*(">
+                                        <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=70&amp;Standort=1022</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <statement name="ELSE">
+                              <block type="exec" id="YBdI~JsNeC=;na#db9(z">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" with_statement="false"></mutation>
+                                <field name="WITH_STATEMENT">FALSE</field>
+                                <field name="LOG"></field>
+                                <value name="COMMAND">
+                                  <shadow type="text" id="A6c[6_6?ipYp=QK-:;I7">
+                                    <field name="TEXT">curl "http://192.168.1.189/rpc/Switch.Set?id=1&amp;on=false"</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="request" id="LRXQc1%U1|eL{2nuK:BP">
+                                    <mutation xmlns="http://www.w3.org/1999/xhtml" with_statement="false"></mutation>
+                                    <field name="WITH_STATEMENT">FALSE</field>
+                                    <field name="LOG"></field>
+                                    <value name="URL">
+                                      <shadow type="text" id="gtc/(e]t)3n)zfZZCr?A">
+                                        <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=71&amp;Standort=1022</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+  <block type="procedures_defnoreturn" id="}:T79mx4*=n`+U#dQI3/" x="713" y="313">
+    <field name="NAME">Parkplatzlicht</field>
+    <comment pinned="false" h="80" w="160">Beschreibe diese Funktion …</comment>
+    <statement name="STACK">
+      <block type="variables_set" id="*F[_]S.17ok)Z0w=*Nia">
+        <field name="VAR" id="js$}Tw(W)EOFJmP2Xa-]">Bewegung</field>
+        <value name="VALUE">
+          <block type="math_number" id="DYmE-m8~kQReshs9.(d0">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="dGTIr;X*J+@+!]9x~:IK">
+            <value name="IF0">
+              <block type="get_value" id=",X.v.VYgOn9%R3aqvuR,">
+                <field name="ATTR">val</field>
+                <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Bewegung_Haustür</field>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="math_change" id="p*cA,KS3!9IBVpoZ?{^o">
+                <field name="VAR" id="js$}Tw(W)EOFJmP2Xa-]">Bewegung</field>
+                <value name="DELTA">
+                  <shadow type="math_number" id="rIz[Mfs?`78wc`G2.pK:">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="controls_if" id="[NC{jQC(Ga1C-5RKwL9-">
+                <value name="IF0">
+                  <block type="get_value" id="SD*t.6$r1{Yl@pwLh=7y">
+                    <field name="ATTR">val</field>
+                    <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Bewegung_Parkplatz</field>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="math_change" id="_j.fVEAQfz:ZH3o6n%eC">
+                    <field name="VAR" id="js$}Tw(W)EOFJmP2Xa-]">Bewegung</field>
+                    <value name="DELTA">
+                      <shadow type="math_number" id="[0:Lp0l$.t3,v19|Fm$H">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="-Af)MNv-L9y|_!azE_tH">
+                    <mutation elseif="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare" id="f%CiJ^3[DgDq,s#1.l2.">
+                        <field name="OP">GT</field>
+                        <value name="A">
+                          <block type="variables_get" id="zJcH2/{@zF}K1.PfIfY6">
+                            <field name="VAR" id="js$}Tw(W)EOFJmP2Xa-]">Bewegung</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="^0=jOFr:+XZDa*a?H,d2">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="controls_if" id="v00-(khm`UODu5JqF(v|">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_negate" id="l`2[DwIsSA$E:x;$drD!">
+                            <value name="BOOL">
+                              <block type="get_value" id="z6*S;A^Z*0Cl-4SDrxru">
+                                <field name="ATTR">val</field>
+                                <field name="OID">0_userdata.0.Zeitfunktionen.Parkplatzlicht_auslassen</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="controls_if" id="_f8#tO37M[RA*Sl3%zF2">
+                            <value name="IF0">
+                              <block type="get_value" id="fHYAcJ;FYG~k7J[?-=P-">
+                                <field name="ATTR">val</field>
+                                <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Außenbeleuchtung</field>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="timeouts_cleartimeout" id="TQpu9Q%9[/`ZtbpMG1!`">
+                                <field name="NAME">Parkplatzlicht aus2</field>
+                                <next>
+                                  <block type="control" id="WtI=T0C;/nJckhS_X=_c">
+                                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                                    <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Licht_Parkplatz</field>
+                                    <field name="WITH_DELAY">FALSE</field>
+                                    <value name="VALUE">
+                                      <block type="logic_boolean" id="nJ]E6e}HhB/4{!aW8#K^">
+                                        <field name="BOOL">TRUE</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="control" id="ro:g@7dJr9goS/JWH*#+">
+                            <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                            <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Licht_Parkplatz</field>
+                            <field name="WITH_DELAY">FALSE</field>
+                            <value name="VALUE">
+                              <block type="logic_boolean" id="#`wtB5t?i|U*|tN5!66p">
+                                <field name="BOOL">FALSE</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                    <value name="IF1">
+                      <block type="logic_compare" id="N`gY1iJB3d~PKxezqqZr">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id=".=M:#rg%7zNp88uBoIyZ">
+                            <field name="VAR" id="js$}Tw(W)EOFJmP2Xa-]">Bewegung</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="R3kA#$}Pk:+A*j_B;vV2">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO1">
+                      <block type="timeouts_settimeout" id="YoMAkw-:nuWU.B6(n+fI">
+                        <field name="NAME">Parkplatzlicht aus2</field>
+                        <field name="DELAY">60</field>
+                        <field name="UNIT">sec</field>
+                        <statement name="STATEMENT">
+                          <block type="control" id="0qy2$?EEaWOcE[4A,d_6">
+                            <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                            <field name="OID">0_userdata.0.Haustechnik.Licht.Aussen.Licht_Parkplatz</field>
+                            <field name="WITH_DELAY">FALSE</field>
+                            <value name="VALUE">
+                              <block type="logic_boolean" id="$mg6z!Yc:+p}iWqvM6n%">
+                                <field name="BOOL">FALSE</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
