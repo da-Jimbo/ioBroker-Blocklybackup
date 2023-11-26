@@ -111,7 +111,7 @@
                             <field name="TEXT">text</field>
                           </shadow>
                           <block type="text" id="{_a|LFbrVqjsBpf{May^">
-                            <field name="TEXT">Das letzte Backup vom Server auf USB-Festplatte ist schon älter als 2 Monate.</field>
+                            <field name="TEXT">Das letzte Backup vom Server auf USB-Festplatte ist schon älter als 1 Monat.</field>
                           </block>
                         </value>
                         <value name="USERNAME">
