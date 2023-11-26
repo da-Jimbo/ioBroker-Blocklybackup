@@ -1,0 +1,118 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="on_ext" id="0tz+h`f[SElhbpxfo8]*" x="-338" y="-1062">
+    <mutation xmlns="http://www.w3.org/1999/xhtml" items="2"></mutation>
+    <field name="CONDITION">ne</field>
+    <field name="ACK_CONDITION"></field>
+    <value name="OID0">
+      <shadow type="field_oid" id="aI~,{Nm$Cb47+xvy-DCX">
+        <field name="oid">deconz.0.Sensors.16.presence</field>
+      </shadow>
+    </value>
+    <value name="OID1">
+      <shadow type="field_oid" id="H3a1*4[gqV1puSbJeVTz">
+        <field name="oid">deconz.0.Sensors.23.presence</field>
+      </shadow>
+    </value>
+    <statement name="STATEMENT">
+      <block type="controls_if" id="0|mD5I4{e{B#Wj*+c@]L">
+        <value name="IF0">
+          <block type="time_compare_ex" id="*@%U*af1F!`qZH|2U7,y">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" end_time="true" actual_time="true"></mutation>
+            <field name="USE_ACTUAL_TIME">TRUE</field>
+            <field name="OPTION">between</field>
+            <value name="START_TIME">
+              <shadow type="text" id="2H)cU$4KQ(X*J`e?Ctp}">
+                <field name="TEXT">05:00</field>
+              </shadow>
+            </value>
+            <value name="END_TIME">
+              <shadow type="text" id="ORc9X7R][a1T#o8CRVZM">
+                <field name="TEXT">06:00</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="control" id="UhK/#QH6nw22X]W8=(SC">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+            <field name="OID">deconz.0.Groups.11.action</field>
+            <field name="WITH_DELAY">FALSE</field>
+            <value name="VALUE">
+              <block type="text_join" id="cs[+!meV]5OZZfcMBxE.">
+                <mutation items="3"></mutation>
+                <value name="ADD0">
+                  <block type="text" id="Q?M*/=_p04?JfeH:O;IF">
+                    <field name="TEXT">"on": true, </field>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="text" id="w=H0@g7eOAa-;Lap,5w+">
+                    <field name="TEXT">"bri": 255,</field>
+                  </block>
+                </value>
+                <value name="ADD2">
+                  <block type="text" id="$J7$SC)6?e@(U1.7e|Cg">
+                    <field name="TEXT">"xy": [0.33,0.33], </field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <next>
+      <block type="on" id="Qit]6jm4U.v!i(yB4[n4">
+        <field name="OID">0_userdata.0.Türen/Fenster.Haustüre.status</field>
+        <field name="CONDITION">ne</field>
+        <field name="ACK_CONDITION"></field>
+        <statement name="STATEMENT">
+          <block type="controls_if" id="*KiodNkNGXk?-8hXrv#n">
+            <value name="IF0">
+              <block type="logic_negate" id="Z3Io~]@$JbRHkq]*xo9^">
+                <value name="BOOL">
+                  <block type="on_source" id="E*HI)chiXv*S-2hTEDL0">
+                    <field name="ATTR">state.val</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="controls_if" id="wGyjxq8FvUXa}{5fC[;7">
+                <value name="IF0">
+                  <block type="time_compare_ex" id="W8v#CV0YMyDpy=4Tax?[">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" end_time="true" actual_time="true"></mutation>
+                    <field name="USE_ACTUAL_TIME">TRUE</field>
+                    <field name="OPTION">between</field>
+                    <value name="START_TIME">
+                      <shadow type="text" id="B5Od~6AH+6n77rWt7^fC">
+                        <field name="TEXT">05:00</field>
+                      </shadow>
+                    </value>
+                    <value name="END_TIME">
+                      <shadow type="text" id="8h=]A3MIxt?]JiHTbWq|">
+                        <field name="TEXT">06:00</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="update" id="Kx`q.g0ir1lspjo^.atF">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" delay_input="false"></mutation>
+                    <field name="OID">0_userdata.0.Hauptschalter.Hauptschalter</field>
+                    <field name="WITH_DELAY">FALSE</field>
+                    <value name="VALUE">
+                      <block type="logic_boolean" id="?09gUyoM5}!;@G#1Gvf|">
+                        <field name="BOOL">TRUE</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>
