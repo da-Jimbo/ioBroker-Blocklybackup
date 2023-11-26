@@ -748,7 +748,7 @@
                                                                             <field name="LOG"></field>
                                                                             <value name="URL">
                                                                               <shadow type="text" id="xes:I0bDlE4*wa,G5^TB">
-                                                                                <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=3&amp;Standort=3010</field>
+                                                                                <field name="TEXT">Status=3&amp;Standort=3010</field>
                                                                               </shadow>
                                                                             </value>
                                                                           </block>
@@ -780,7 +780,7 @@
                                                                             <field name="LOG"></field>
                                                                             <value name="URL">
                                                                               <shadow type="text" id="2ALxRU7%`dO}4J@-VZ^$">
-                                                                                <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=5&amp;Standort=3010</field>
+                                                                                <field name="TEXT">Status=5&amp;Standort=3010</field>
                                                                               </shadow>
                                                                             </value>
                                                                           </block>
@@ -812,7 +812,7 @@
                                                                             <field name="LOG"></field>
                                                                             <value name="URL">
                                                                               <shadow type="text" id="w]ct@|iD20Xo~rM85XBn">
-                                                                                <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=4&amp;Standort=3010</field>
+                                                                                <field name="TEXT">Status=4&amp;Standort=3010</field>
                                                                               </shadow>
                                                                             </value>
                                                                           </block>
@@ -873,7 +873,7 @@
                                                                                             <field name="LOG"></field>
                                                                                             <value name="URL">
                                                                                               <shadow type="text" id="%)$?Eom?[+*qpEQfn5l7">
-                                                                                                <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=27&amp;Standort=3013</field>
+                                                                                                <field name="TEXT">Status=27&amp;Standort=3013</field>
                                                                                               </shadow>
                                                                                             </value>
                                                                                           </block>
@@ -1120,7 +1120,7 @@
                                                                                                 <field name="LOG"></field>
                                                                                                 <value name="URL">
                                                                                                   <shadow type="text" id="f-y1,q9aHxi(lxaU0LA3">
-                                                                                                    <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=27&amp;Standort=3012</field>
+                                                                                                    <field name="TEXT">Status=27&amp;Standort=3012</field>
                                                                                                   </shadow>
                                                                                                 </value>
                                                                                               </block>
@@ -1416,7 +1416,7 @@
                                                                                                     <field name="LOG"></field>
                                                                                                     <value name="URL">
                                                                                                       <shadow type="text" id="^MUbm%uvo(e0q.3LW1AL">
-                                                                                                        <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=27&amp;Standort=3011</field>
+                                                                                                        <field name="TEXT">Status=27&amp;Standort=3011</field>
                                                                                                       </shadow>
                                                                                                     </value>
                                                                                                   </block>
@@ -1694,7 +1694,7 @@
                                                                                                     <field name="LOG"></field>
                                                                                                     <value name="URL">
                                                                                                       <shadow type="text" id="1$Kr}*wCGP7m:gz8Q[+q">
-                                                                                                        <field name="TEXT">http://da-jimbo.oslo.webspace24.de/Shelly/shelly.php?Status=27&amp;Standort=3009</field>
+                                                                                                        <field name="TEXT">Status=27&amp;Standort=3009</field>
                                                                                                       </shadow>
                                                                                                     </value>
                                                                                                   </block>
